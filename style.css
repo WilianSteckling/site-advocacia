@@ -1,127 +1,452 @@
 :root {
-  --brand-dark: #033b40;
-  --brand-sand: #caaa8a;
-  --text: #1a1a1a;
-  --muted: #5a5a5a;
-  --bg: #ffffff;
-  --bg-alt: #f7f9f9;
-  --hero-desktop: url('hero-desktop.jpg');
-  --hero-mobile: url('hero-mobile.jpg');
-  --logo-src: url('logo.png');
-  --logo-modal: url('logo-modal.png');
+    --brand-dark: #033b40; /* verde petróleo */
+    --brand-sand: #caaa8a; /* bege areia (usada para destaque) */
+    --brand-light: #f8fafc; /* quase branco, para fundos suaves */
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #ffffff;
+    /* Hero images will be directly in HTML now, so these are no longer used for background */
+    --logo-header-src: url('imgs/logo-rodapé.png'); /* Caminho da logo pequena para o cabeçalho */
+    /* --logo-full-src is removed, as the main logo will be HTML text for flexibility */
 }
 
+/* Base styles */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, "Helvetica Neue", sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+html, body {
+    margin:0; padding:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, "Helvetica Neue", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    scroll-behavior: smooth; /* Rolagem suave para âncoras */
+}
 a { color: inherit; text-decoration: none; }
-img { max-width: 100%; height: auto; border: 0; display: block; }
-p { text-align: justify; }
+img { max-width: 100%; height: auto; border: 0; }
+
+.container { width: min(1200px, 92%); margin: 0 auto; }
 
 /* ================= Header ================= */
-.header { position: sticky; top:0; z-index: 1000; background: rgba(255,255,255,0.96); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid rgba(3,59,64,0.12); }
-.container { width: min(1200px, 92%); margin: 0 auto; }
-.nav { display: flex; align-items: center; justify-content: space-between; padding: .75rem 0; }
-.brand { display:flex; align-items:center; gap:.75rem; }
-.brand-logo { width: 42px; height: 42px; background-image: var(--logo-src); background-size: contain; background-repeat:no-repeat; background-position:center; }
-.brand-name { font-weight: 700; letter-spacing: .2px; color: var(--brand-dark); }
-.menu { display:flex; gap:1rem; }
-.menu a { padding: .5rem .75rem; border-radius: 999px; color: var(--muted); transition: color .2s, background-color .2s; }
-.menu a:hover { background: rgba(3,59,64,.075); color: var(--brand-dark); }
-
-/* ================= Hero ================= */
-.hero { position: relative; min-height: 78vh; display:grid; place-items:center; text-align:center; color:#fff; overflow:hidden; }
-.hero::before { content:""; position:absolute; inset:0; background-image: var(--hero-desktop); background-size: cover; background-position: center; transform: scale(1.02); filter: brightness(.55) saturate(1.05); }
-.hero-inner { position: relative; padding: clamp(2rem, 6vw, 5rem) 1rem; }
-.kicker { display:inline-block; padding:.35rem .75rem; border-radius:999px; background: rgba(202,170,138,.9); color:#052b2e; font-weight:600; letter-spacing:.25px; margin-bottom: .75rem; }
-.hero h1 { font-size: clamp(2rem, 3.8vw, 3rem); line-height: 1.15; margin: .25rem 0 .75rem; text-align: center; }
-.hero p { font-size: clamp(1rem, 2vw, 1.15rem); opacity: .96; max-width: 65ch; margin-left: auto; margin-right: auto; text-align: center; }
-.cta { margin-top:1.5rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
-.btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1.2rem; border-radius: .75rem; border:1px solid transparent; font-weight:600; transition: all .2s; }
-.btn.primary { background: var(--brand-dark); color:#fff; }
-.btn.primary:hover { filter: brightness(1.15); transform: translateY(-2px); }
-.btn.ghost { border-color: rgba(255,255,255,.7); color:#fff; background: transparent; }
-.btn.ghost:hover { background: rgba(255,255,255,.1); border-color: #fff; }
-
-/* ================= Sections Gerais ================= */
-section { padding: clamp(3rem, 7vw, 5rem) 0; }
-.section-bg-alt { background-color: var(--bg-alt); }
-.section-title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin:0 0 1rem; color: var(--brand-dark); text-align: center; }
-.lead { color: var(--muted); max-width: 70ch; margin: 0 auto 1rem; text-align: center; }
-.spacer-md{ height:2rem; }
-
-/* CORREÇÃO: Layout da Seção "Sobre" */
-.about-section .container { text-align: center; }
-.about-section p { max-width: 75ch; margin-left: auto; margin-right: auto; }
-.about-section .lead { margin-bottom: 1.5rem; }
-
-/* ================= Equipe ================= */
-.team-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem; }
-.lawyer { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; overflow:hidden; display:flex; flex-direction:column; background:#fff; box-shadow: 0 4px 12px rgba(3,59,64,.05); }
-.lawyer .photo { aspect-ratio: 4/3; width:100%; object-fit: cover; background:#eef3f3; }
-.lawyer .body { padding:1.25rem; display:flex; flex-direction:column; gap:.35rem; flex-grow: 1; }
-.lawyer .name { font-weight: 700; color: var(--brand-dark); }
-.lawyer .oab { font-size:.92rem; color: var(--muted); }
-.lawyer .tags { margin:.35rem 0 .5rem; display:flex; flex-wrap:wrap; gap:.35rem; }
-.tag { font-size:.82rem; padding:.25rem .5rem; border-radius: 999px; background: rgba(202,170,138,.18); color:#3b2b1b; border: 1px solid rgba(202,170,138,.55); }
-
-/* ================= Áreas de Atuação (Interativo) ================= */
-.areas-interactive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-.area-button { width: 100%; padding: 1.25rem 1.5rem; border: 1px solid rgba(3,59,64,.14); border-radius: .9rem; background-color: #fff; font-size: 1.05rem; font-weight: 600; color: var(--brand-dark); text-align: left; cursor: pointer; transition: all .2s ease; }
-.area-button:hover { box-shadow: 0 10px 22px rgba(3,59,64,.12); transform: translateY(-3px); background-color: #fff; }
-
-/* ================= Seção CTA ================= */
-.cta-section { background: var(--brand-dark); color:#e8f0f0; }
-.cta-section .section-title, .cta-section .lead { color: #fff; }
-.cta-section .lead { opacity: 0.9; }
-.cta-container { display:flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; text-align: center; }
-.cta-container > div:first-child { flex: 1 1 500px; text-align: left; }
-.cta-buttons { display:flex; gap:.75rem; flex-wrap: wrap; justify-content: center; }
-.cta-section .btn.primary { background: var(--brand-sand); color:#052b2e; }
-.cta-section .btn.ghost { border-color: rgba(255,255,255,.7); }
-@media (max-width: 800px) { /* MELHORIA: Responsividade do CTA */
-  .cta-container, .cta-container > div:first-child { text-align: center; }
+.header {
+    position: sticky; top:0; z-index: 1000;
+    background: var(--bg); /* Fundo branco sólido */
+    border-bottom: 1px solid rgba(3,59,64,0.12);
+}
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 0;
+    gap: 1.5rem; /* Espaçamento entre os itens da navegação */
+}
+.header .brand {
+    display:flex; align-items:center; gap:.75rem;
+    flex-shrink: 0; /* Evita que a logo encolha */
+}
+.header .brand-logo { /* Logo pequena no cabeçalho */
+    width: 36px; /* Tamanho ajustado para o cabeçalho */
+    height: 36px;
+    background-image: var(--logo-header-src); /* Usando a nova variável */
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.header .brand-name {
+    font-weight: 700;
+    letter-spacing: .2px;
+    color: var(--brand-dark);
+    font-size: 1.1rem;
+    display: none; /* Esconder o nome da marca ao lado da logo */
+}
+.menu {
+    display:flex;
+    gap:1.5rem; /* Aumenta o espaçamento entre os itens do menu */
+    flex-grow: 1; /* Permite que o menu ocupe o espaço disponível */
+    justify-content: flex-start; /* Alinha o menu à esquerda */
+    align-items: center;
+    margin-left: 2rem; /* Espaçamento após a logo do header */
+}
+.menu a {
+    padding: .5rem .75rem;
+    border-radius: 999px;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+.menu a:hover {
+    background: rgba(3,59,64,.075);
+    color: var(--brand-dark);
+}
+.header .contact-button { /* Novo botão de contato no cabeçalho */
+    background: var(--brand-dark);
+    color: #fff;
+    padding: .6rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0; /* Evita que o botão encolha */
+    white-space: nowrap; /* Evita quebra de linha no número */
+}
+.header .contact-button:hover {
+    filter: brightness(1.1);
 }
 
-/* ================= Contato ================= */
-.contact { display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:start; }
-@media (max-width: 900px){ .contact { grid-template-columns: 1fr; } }
-.contact .card { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; padding: 2rem; background-color: #fff; }
-.form-title { margin-top:0; color: var(--brand-dark); }
-form { display: flex; flex-direction: column; gap: 1rem; }
-form label { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
-form input, form textarea { width:100%; padding:.75rem; border-radius:.6rem; border:1px solid rgba(3,59,64,.25); margin-top: 0.25rem; font-family: inherit; font-size: 1rem; }
+@media (max-width: 900px) {
+    .menu {
+        justify-content: flex-end; /* Alinha menu à direita em telas médias */
+        margin-left: 0;
+    }
+    .header .brand-name {
+        display: none; /* Esconder nome da marca em telas médias */
+    }
+}
+@media (max-width: 700px) {
+    .menu {
+        display: none; /* Esconde o menu em telas menores */
+    }
+    .nav {
+        justify-content: space-between; /* Ajusta o layout da nav */
+    }
+}
 
-/* ================= Footer ================= */
-.footer { background: #062b2d; color:#dfe7e7; padding:2rem 0; font-size: 0.95rem; }
+
+/* ================================================================ */
+/* ==== NOVA SEÇÃO HERO (LOGO SIMPLES + FRASE) - ==== */
+/* ================================================================ */
+
+.hero {
+  background: var(--brand-light);
+  padding: 0;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+  gap: 2rem;
+  align-items: center; /* Alinha os itens verticalmente ao centro */
+  min-height: calc(100vh - 53px);
+}
+
+.hero-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* <-- MUDADO AQUI: Centraliza o bloco */
+  padding-right: 2rem;
+}
+
+/* Novo estilo para a logo simples (monograma SB) */
+.hero-logo-simple {
+  width: 600px;  /* Tamanho da logo */
+  height: 600px;
+  background-image: var(--logo-header-src); /* Usa a mesma logo pequena do cabeçalho */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 1.5rem; /* Espaço entre a logo e a frase */
+}
+
+/* Estilo para a frase "Compromisso, ética e resultado." */
+.hero-subtitle-phrase {
+  font-size: 20px; /* <-- NOVO TAMANHO. Ajuste este valor se precisar */
+  line-height: 1.1; /* Altura da linha ajustada para a nova fonte */
+  color: var(--brand-dark);
+  font-weight: 600;
+  text-align: left;
+  margin: 0;
+}
+
+.hero-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.hero-image-container img {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh; /* Limita a altura máxima da imagem */
+  width: auto;
+  height: auto;
+  object-fit: contain; /* Garante que a imagem inteira apareça sem cortes */
+  border-radius: 1.5rem; /* Bordas bem arredondadas */
+  box-shadow: 0 15px 40px rgba(3,59,64,.12);
+}
+
+/* NOVA VERSÃO PARA CELULAR - SUBSTITUA PELO CÓDIGO ABAIXO */
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    min-height: auto;
+    padding: 4rem 1rem; /* Aumenta o espaçamento vertical e adiciona nas laterais */
+  }
+  .hero-text-container {
+    align-items: center;
+    padding-right: 0;
+  }
+  /* AUMENTA A LOGO NO CELULAR */
+  .hero-logo-simple {
+    width: 300px;
+    height: 300px;
+  }
+  /* AUMENTA A FRASE NO CELULAR */
+  .hero-subtitle-phrase {
+    text-align: center;
+    /* Usa a função clamp para um tamanho responsivo, mas com um mínimo maior */
+    font-size: clamp(2.2rem, 10vw, 2.8rem); 
+  }
+  .hero-image-container {
+    margin-top: 3rem; /* Aumenta o espaço entre o texto e a imagem */
+  }
+}
+/* ================= Sections ================= */
+section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
+.section-title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin:0 0 1rem; color: var(--brand-dark); }
+.lead { color: var(--muted); max-width: 65ch; }
+
+/* About */
+.about { display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:center; }
+.about .image { border-radius: 1rem; overflow:hidden; box-shadow: 0 10px 30px rgba(3,59,64,.15); }
+@media (max-width: 900px){ .about { grid-template-columns: 1fr; } }
+
+/* Áreas de Atuação */
+.areas-grid, .areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
+@media (max-width: 900px){ .areas-grid, .areas-interactive-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px){ .areas-grid, .areas-interactive-grid { grid-template-columns: 1fr; } }
+.area-card { border:1px solid rgba(3,59,64,.14); border-radius: .9rem; padding:1rem; transition: box-shadow .2s ease, transform .2s ease; cursor: pointer; }
+.area-card:hover { box-shadow: 0 10px 22px rgba(3,59,64,.12); transform: translateY(-2px); }
+.area-card h3 { margin:.2rem 0 .4rem; font-size:1.05rem; color: var(--brand-dark); }
+.area-card p { margin:0; color: var(--muted); font-size:.95rem; }
+
+/* Equipe */
+.team-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; }
+@media (max-width: 1100px){ .team-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px){ .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px){ .team-grid { grid-template-columns: 1fr; } }
+.lawyer { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; overflow:hidden; display:flex; flex-direction:column; background:#fff; }
+.lawyer .photo { aspect-ratio: 4/3; width:100%; object-fit: cover; object-position: center 20%; background:#eef3f3; } /* <-- VALOR ALTERADO PARA 20% */
+.lawyer .body { padding:1rem; display:flex; flex-direction:column; gap:.35rem; }
+.lawyer .name { font-weight: 700; color: var(--brand-dark); }
+.lawyer .oab { font-size:.92rem; color: var(--muted); }
+.lawyer .tags { margin:.25rem 0 .35rem; display:flex; flex-wrap:wrap; gap:.35rem; }
+.tag { font-size:.82rem; padding:.25rem .5rem; border-radius: 999px; background: rgba(202,170,138,.18); color:#b2b; border: 1px solid rgba(202,170,138,.55); }
+
+/* Contato */
+.contact { display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:start; }
+@media (max-width: 900px){ .contact { grid-template-columns: 1fr; } }
+.contact .card { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; padding:1rem; }
+
+/* Footer */
+.footer { background: #062b2d; color:#dfe7e7; padding:2rem 0; }
 .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
 .footer .brand-logo { filter: invert(1) saturate(0) brightness(2); opacity:.9; }
-.footer-brand-name { font-weight:700; letter-spacing:.3px; }
+.footer-brand-name {
+    font-weight: 700;
+    letter-spacing: .2px;
+    color: #fff; /* Cor do texto no footer */
+    font-size: 1.1rem;
+}
 
-/* ================= Botão WhatsApp ================= */
-.whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 1100; }
-.whatsapp a { display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; box-shadow: 0 10px 22px rgba(0,0,0,.22); font-size: 0; transition: transform .2s, filter .2s; }
-.whatsapp a::before { content:""; width:28px; height:28px; background:url('whatsapp.svg') center/contain no-repeat; filter: invert(1); }
-.whatsapp a:hover { filter: brightness(1.08); transform: scale(1.05); }
+/* ======================================= */
+/* ==== Animação de Flutuação (Float) ==== */
+/* ======================================= */
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px); /* O quão alto o botão vai subir */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 
-/* ================= Efeito de Revelação ================= */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ======================================= */
+/* ==== Botão WhatsApp Flutuante Aprimorado ==== */
+/* ======================================= */
+.whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1100;
+}
 
-/* ================= Modal "Áreas de Atuação" ================= */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(3, 59, 64, 0.8); display: none; justify-content: center; align-items: center; padding: 1rem; z-index: 2000; backdrop-filter: blur(5px); animation: fadeIn 0.3s ease; }
-.modal-content { position: relative; background-color: var(--brand-dark); color: #fff; padding: clamp(1.5rem, 5vw, 2.5rem); border-radius: 1rem; max-width: 600px; width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.4); text-align: center; animation: slideUp 0.4s ease-out; }
-.modal-logo { width: 80px; height: 80px; background-image: var(--logo-modal); background-size: contain; background-repeat: no-repeat; background-position: center; margin: 0 auto 1.5rem; }
-.modal-title { font-size: clamp(1.4rem, 2.4vw, 1.7rem); margin: 0 0 1rem; color: #fff; }
-.modal-text { color: #dfe7e7; opacity: 0.95; margin-bottom: 1rem; line-height: 1.6; text-align: center; }
-.modal-text.examples { font-style: italic; opacity: 0.85; font-size: 0.95rem; }
-.modal-close-btn { position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; font-size: 2rem; color: rgba(255,255,255,0.7); cursor: pointer; line-height: 1; transition: color .2s; }
-.modal-close-btn:hover { color: #fff; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.whatsapp a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+  font-size: 0;
+  animation: floatAnimation 2.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
 
-/* ================= Responsividade Mobile ================= */
-@media (max-width: 640px) {
-  .hero::before{ background-image: var(--hero-mobile); }
-  .brand-name { display: none; } /* Oculta nome no header em telas pequenas */
+.whatsapp a:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
+}
+
+/* Ícone do WhatsApp (SVG embutido para garantir que sempre apareça) */
+.whatsapp a::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23ffffff' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 221.9-99.6 221.9-222 .1-59.3-25.1-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.2-27.9l-6.9-4.1-72.1 18.9L99 353.5l-4.5-7.3c-18.9-30.1-29.6-65.4-29.6-101.8 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Utilidades */
+.muted { color: var(--muted); }
+.spacer-xs{ height:.5rem; }
+.spacer-sm{ height:1rem; }
+.spacer-md{ height:1.5rem; }
+
+/* ======================================= */
+/* ==== Estilos do Formulário de Contato === */
+/* ======================================= */
+
+/* Organiza o formulário em uma coluna com espaçamento */
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Espaço entre os campos do formulário */
+}
+
+/* Estiliza os rótulos (Nome, E-mail, etc.) */
+.contact form label {
+  display: flex;
+  flex-direction: column; /* Coloca o texto do rótulo acima do campo */
+  gap: 0.4rem; /* Espaço entre o rótulo e o campo de digitação */
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Estilo base para todos os campos de digitação (input e textarea) */
+.contact form input,
+.contact form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid rgba(3, 59, 64, 0.2); /* Borda sutil com a cor da sua marca */
+  border-radius: 0.75rem; /* Mesma borda dos botões */
+  background-color: #f8fafc;
+  font-size: 1rem;
+  font-family: inherit; /* Usa a mesma fonte do site */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito visual quando o usuário clica em um campo */
+.contact form input:focus,
+.contact form textarea:focus {
+  outline: none;
+  border-color: var(--brand-dark); /* Borda fica da cor principal */
+  box-shadow: 0 0 0 3px rgba(3, 59, 64, 0.1); /* Brilho suave ao redor */
+}
+
+/* Ajuste específico para a área de mensagem */
+.contact form textarea {
+  resize: vertical; /* Permite que o usuário aumente a altura, mas não a largura */
+  min-height: 120px;
+}
+
+/* Deixa o botão de envio com largura total e mais destaque */
+.contact form button.btn.primary {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.05rem;
+  margin-top: 0.5rem; /* Espaço extra acima do botão */
+}
+
+/* =============================== */
+/* ==== CÓDIGO DO MODAL ABAIXO === */
+/* =============================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 59, 64, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--brand-dark);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: min(600px, 90%);
+  position: relative;
+  text-align: center;
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close-btn:hover {
+  opacity: 1;
+}
+
+.modal-logo {
+  width: 250px;
+  height: 250px;
+  background-image: var(--logo-header-src);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto 1rem;
+  filter: invert(1) saturate(0) brightness(2); /* Deixa a logo branca */
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.modal-text {
+  opacity: 0.9;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.modal-text.examples {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 0.95rem;
 }
