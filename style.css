@@ -6,8 +6,10 @@
     --muted: #5a5a5a;
     --bg: #ffffff;
     --logo-header-src: url('imgs/logo-icon.png'); /* Caminho da logo pequena para o cabeçalho */
-    --hero-bg-image: url('imgs/hero-desktop.jpeg');     /* Foto da equipe para o fundo */
+    --hero-bg-image: url('imgs/hero-mobile.jpeg');     /* Foto da equipe para o fundo */
+    --hero-bg-image-mobile: url('imgs/hero-mobile.jpeg'); /* Imagem para celular */
 
+    /* VARIÁVEIS DE FONTE */
     --font-title: 'Libre Baskerville', serif;
     --font-body: 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -16,30 +18,29 @@
 * { box-sizing: border-box; }
 html, body {
     margin:0; padding:0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, "Helvetica Neue", sans-serif;
+    font-family: var(--font-body);
     color: var(--text);
     background: var(--bg);
-    scroll-behavior: smooth; /* Rolagem suave para âncoras */
+    scroll-behavior: smooth;
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; height: auto; border: 0; }
 
 .container { width: min(1200px, 92%); margin: 0 auto; }
 
-/* ================= Header ================= */
+/* ================= Header (CORRIGIDO PARA FICAR FIXO) ================= */
 .header {
-    position: absolute; /* MUDANÇA: Volta a ser absoluto para flutuar no início */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: transparent; /* Fundo transparente no início */
+    background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding: .5rem 0;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    padding: .25rem 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
-/* Estilos iniciais do texto e da logo (brancos) */
 .header .brand-name,
 .header .menu a {
     color: #fff;
@@ -48,10 +49,8 @@ img { max-width: 100%; height: auto; border: 0; }
     filter: brightness(0) invert(1);
 }
 
-
-/* ESTADO DO HEADER QUANDO A PÁGINA É ROLADA */
 .header.scrolled {
-    position: fixed; /* MUDANÇA: Fica fixo ao rolar */
+    position: fixed;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-bottom-color: rgba(0, 0, 0, 0.08);
@@ -59,17 +58,19 @@ img { max-width: 100%; height: auto; border: 0; }
 }
 .header.scrolled .brand-name,
 .header.scrolled .menu a {
-    color: var(--muted); /* Muda a cor do texto para escuro */
+    color: var(--muted);
 }
 .header.scrolled .menu a:hover {
     color: var(--brand-dark);
     background: rgba(3,59,64,.075);
 }
 .header.scrolled .brand-logo {
-    filter: none; /* Remove o filtro branco para mostrar a logo original (escura) */
+    filter: none;
+}
+.header.scrolled .contact-button {
+    border-color: transparent;
 }
 
-/* Adiciona transições para suavizar as mudanças de cor */
 .header .brand-name, .header .menu a, .header .brand-logo {
     transition: color 0.3s ease, filter 0.3s ease;
 }
@@ -82,19 +83,20 @@ img { max-width: 100%; height: auto; border: 0; }
     display:flex;
     align-items:center;
     gap:.75rem;
-    color: #fff; /* Cor do texto da marca */
+    color: #fff;
     font-weight: 500;
 }
 .header .brand-logo {
-    width: 100px;
-    height: 100px;
+    width: 120px;px;
+    height: 120px;
     background-image: var(--logo-header-src);
     background-size: contain;
     background-repeat:no-repeat;
     background-position:center;
-    filter: brightness(0) invert(1); /* Deixa a logo branca */
+    transition: width 0.3s ease, height 0.3s ease;
 }
 .header .brand-name {
+    font-family: var(--font-title);
     font-size: 1rem;
 }
 .menu {
@@ -102,6 +104,7 @@ img { max-width: 100%; height: auto; border: 0; }
     gap: 2rem;
 }
 .menu a {
+    font-family: var(--font-body);
     color: #fff;
     opacity: 0.8;
     font-weight: 500;
@@ -113,20 +116,13 @@ img { max-width: 100%; height: auto; border: 0; }
 .header .contact-button {
     background: var(--brand-dark);
     color: #fff;
-    padding: .6rem .6rem .6rem 1rem; /* Padding ajustado */
-    border-radius: 999px; /* Formato de pílula */
+    padding: .8rem 1.2rem;
+    border-radius: 999px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     border: 1px solid rgba(255,255,255,0.3);
-}
-.header .contact-button .logo-in-button {
-    width: 28px;
-    height: 28px;
-    background-image: var(--logo-header-src);
-    background-size: contain;
-    filter: brightness(0) invert(1);
 }
 
 /* ================= Hero (VERSÃO FINAL E CORRIGIDA) ================= */
@@ -155,176 +151,100 @@ img { max-width: 100%; height: auto; border: 0; }
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    /* Adicionado para garantir que o contêiner possa se esticar se necessário */
     width: 100%; 
 }
-.hero-logo {
-    width: 340px;
-    height: 340px;
-    background-image: var(--logo-header-src);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto;
+.hero-logo-img {
+    width: 280px;
+    height: auto;
     filter: brightness(0) invert(1);
 }
 .hero-tagline {
-    font-size: 38px; 
-    font-weight: 300;
+    font-family: var(--font-title);
+    font-size: 28px; 
+    font-weight: 400;
     line-height: 1.2;
-    /* Removido max-width para não limitar o alinhamento */
-    /* max-width: 30ch; */ 
+    text-align: center;
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    /* Garante a centralização do texto */
-    text-align: center; 
 }
 
 /* ================= Sections ================= */
 section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
-.section-title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin:0 0 1rem; color: var(--brand-dark); }
+.section-bg-alt { background-color: var(--brand-light); }
+h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer, .area-card h3 {
+    font-family: var(--font-title);
+}
+.section-title { 
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem); 
+    margin:0 0 1rem; 
+    color: var(--brand-dark); 
+}
 .lead { color: var(--muted); max-width: 65ch; }
 
 /* About */
-.about { display:grid; grid-template-columns: 0.9fr 1.1fr; gap:2rem; align-items:center; } /* <-- LINHA MODIFICADA */
+.about { display:grid; grid-template-columns: 0.9fr 1.1fr; gap:2rem; align-items:center; }
 .about .image { border-radius: 1rem; overflow:hidden; box-shadow: 0 10px 30px rgba(3,59,64,.15); }
-@media (max-width: 900px){ .about { grid-template-columns: 1fr; } }
 
 /* Áreas de Atuação */
-.areas-grid, .areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
-@media (max-width: 900px){ .areas-grid, .areas-interactive-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 600px){ .areas-grid, .areas-interactive-grid { grid-template-columns: 1fr; } }
+.areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
 .area-card { border:1px solid rgba(3,59,64,.14); border-radius: .9rem; padding:1rem; transition: box-shadow .2s ease, transform .2s ease; cursor: pointer; }
 .area-card:hover { box-shadow: 0 10px 22px rgba(3,59,64,.12); transform: translateY(-2px); }
-.area-card h3 { margin:.2rem 0 .4rem; font-size:1.05rem; color: var(--brand-dark); }
-.area-card p { margin:0; color: var(--muted); font-size:.95rem; }
 
 /* Equipe */
 .team-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; }
-@media (max-width: 1100px){ .team-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 800px){ .team-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px){ .team-grid { grid-template-columns: 1fr; } }
 .lawyer { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; overflow:hidden; display:flex; flex-direction:column; background:#fff; }
 .lawyer .photo { aspect-ratio: 4/3; width:100%; object-fit: cover; object-position: center 20%; background:#eef3f3; }
 .lawyer .body { padding:1rem; display:flex; flex-direction:column; gap:.35rem; }
 .lawyer .name { font-weight: 700; color: var(--brand-dark); }
 .lawyer .oab { font-size:.92rem; color: var(--muted); }
-.lawyer .tags { margin:.25rem 0 .35rem; display:flex; flex-wrap:wrap; gap:.35rem; }
-.tag { font-size:.82rem; padding:.25rem .5rem; border-radius: 999px; background: rgba(202,170,138,.18); color:#b2b; border: 1px solid rgba(202,170,138,.55); }
-
-.lawyer .tags { 
-  display: none; 
-}
-
-/* Ajuste específico para a foto da Leandra Bogoni */
-.lawyer .photo.pos-leandra {
-  object-position: center 15%; /* Puxa a imagem um pouco mais para baixo */
-}
-
-/* Ajuste específico para a foto do Fausto Ouriques */
-.lawyer .photo.pos-fausto {
-  object-position: center 10%; /* Puxa a imagem ainda mais para baixo */
-}
+.lawyer .tags { display: none; }
+.lawyer .photo.pos-leandra { object-position: center 15%; }
+.lawyer .photo.pos-fausto { object-position: center 10%; }
 
 /* Contato */
-.contact { display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:start; }
-@media (max-width: 900px){ .contact { grid-template-columns: 1fr; } }
-.contact .card { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; padding:1rem; }
+.contact { 
+    display:grid; 
+    grid-template-columns: 1fr; 
+    gap:2rem; 
+    align-items:start; 
+    justify-items: center; 
+}
+.contact .card { 
+    border:1px solid rgba(3,59,64,.14); 
+    border-radius: 1rem; 
+    padding:1.5rem; 
+    max-width: 600px; 
+    width: 100%; 
+}
 
 /* ================= Footer (NOVO LAYOUT) ================= */
 .footer {
-  background: #f7f7f7; /* Um cinza bem claro, como na referência */
+  background: #f7f7f7;
   color: var(--muted);
-  padding: 3rem 0 0; /* Mais padding no topo, sem padding embaixo */
+  padding: 3rem 0 0;
   font-size: 0.9rem;
   border-top: 1px solid #e0e0e0;
 }
-
 .footer-content {
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr;
   gap: 2rem;
   align-items: start;
   padding-bottom: 2rem;
 }
-
-@media (max-width: 900px) {
-  .footer-content {
-    grid-template-columns: 1fr 1fr; /* Duas colunas em tablets */
-  }
-}
-@media (max-width: 600px) {
-  .footer-content {
-    grid-template-columns: 1fr; /* Uma coluna em celulares */
-    text-align: center;
-  }
-}
-
-
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-@media (max-width: 600px) {
-  .footer-brand {
-    flex-direction: column; /* Logo acima do texto em celulares */
-    margin-bottom: 1rem;
-  }
-}
-
+.footer-brand { display: flex; align-items: center; gap: 1rem; }
 .footer-logo {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   background-image: var(--logo-header-src);
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: auto;
+  background-position: center;
   flex-shrink: 0;
 }
-
-.brand-name-footer {
-  font-family: serif;
-  font-size: 1.1rem;
-  line-height: 1.3;
-  color: var(--brand-dark);
-  margin: 0;
-}
-.brand-name-footer small {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-}
-
-.footer-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer-title {
-  font-weight: 700;
-  color: var(--text);
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-}
-
-.footer-column a {
-  text-decoration: underline;
-  text-decoration-color: rgba(0,0,0,0.2);
-  transition: color 0.2s ease;
-}
-
-.footer-column a:hover {
-  color: var(--brand-dark);
-}
-
-.footer-bottom {
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.8rem;
-  border-top: 1px solid #e0e0e0;
-  margin-top: 2rem;
-}
+.footer-column { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-column a { text-decoration: underline; text-decoration-color: rgba(0,0,0,0.2); transition: color 0.2s ease; }
+.footer-column a:hover { color: var(--brand-dark); }
+.footer-bottom { text-align: center; padding: 1rem 0; font-size: 0.8rem; border-top: 1px solid #e0e0e0; margin-top: 2rem; }
 
 /* Animação de Flutuação (Float) */
 @keyframes floatAnimation {
@@ -333,7 +253,7 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
   100% { transform: translateY(0); }
 }
 
-/* Botão WhatsApp Flutuante Aprimorado */
+/* Botão WhatsApp Flutuante */
 .whatsapp {
   position: fixed;
   right: 18px;
@@ -428,5 +348,73 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
   font-style: italic;
   opacity: 0.8;
   font-size: 0.95rem;
+}
+
+/* ======================================================= */
+/* ==== Media Queries para Responsividade (Mobile) ==== */
+/* ======================================================= */
+
+@media (max-width: 900px) {
+    .header .menu,
+    .header .brand-name {
+        display: none;
+    }
+    
+    .nav {
+        justify-content: space-between;
+    }
+    .header .brand {
+        flex-grow: 1;
+    }
+    .header .brand-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .about,
+    .team-grid,
+    .areas-interactive-grid,
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        background-image: var(--hero-bg-image-mobile);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center 20%;
+        min-height: 80vh;
+    }
+
+    .hero-logo-img {
+        width: 220px;
+    }
+
+    .hero-tagline {
+        font-size: 24px;
+    }
+
+    section {
+        padding: 2rem 0;
+    }
+
+    .about,
+    .team-grid,
+    .areas-interactive-grid,
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .about .image {
+        margin-top: 1.5rem;
+    }
+
+    .footer-brand {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
 }
 
