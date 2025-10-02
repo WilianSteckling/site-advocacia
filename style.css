@@ -5,9 +5,11 @@
     --text: #1a1a1a;
     --muted: #5a5a5a;
     --bg: #ffffff;
-    /* Hero images will be directly in HTML now, so these are no longer used for background */
-    --logo-header-src: url('imgs/logo-rodapé.png'); /* Caminho da logo pequena para o cabeçalho */
-    /* --logo-full-src is removed, as the main logo will be HTML text for flexibility */
+    --logo-header-src: url('imgs/logo-icon.png'); /* Caminho da logo pequena para o cabeçalho */
+    --hero-bg-image: url('imgs/hero-desktop.jpeg');     /* Foto da equipe para o fundo */
+
+    --font-title: 'Libre Baskerville', serif;
+    --font-body: 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Base styles */
@@ -26,189 +28,163 @@ img { max-width: 100%; height: auto; border: 0; }
 
 /* ================= Header ================= */
 .header {
-    position: sticky; top:0; z-index: 1000;
-    background: var(--bg); /* Fundo branco sólido */
-    border-bottom: 1px solid rgba(3,59,64,0.12);
+    position: absolute; /* MUDANÇA: Volta a ser absoluto para flutuar no início */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent; /* Fundo transparente no início */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: .5rem 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilos iniciais do texto e da logo (brancos) */
+.header .brand-name,
+.header .menu a {
+    color: #fff;
+}
+.header .brand-logo {
+    filter: brightness(0) invert(1);
+}
+
+
+/* ESTADO DO HEADER QUANDO A PÁGINA É ROLADA */
+.header.scrolled {
+    position: fixed; /* MUDANÇA: Fica fixo ao rolar */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.header.scrolled .brand-name,
+.header.scrolled .menu a {
+    color: var(--muted); /* Muda a cor do texto para escuro */
+}
+.header.scrolled .menu a:hover {
+    color: var(--brand-dark);
+    background: rgba(3,59,64,.075);
+}
+.header.scrolled .brand-logo {
+    filter: none; /* Remove o filtro branco para mostrar a logo original (escura) */
+}
+
+/* Adiciona transições para suavizar as mudanças de cor */
+.header .brand-name, .header .menu a, .header .brand-logo {
+    transition: color 0.3s ease, filter 0.3s ease;
 }
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .75rem 0;
-    gap: 1.5rem; /* Espaçamento entre os itens da navegação */
 }
 .header .brand {
-    display:flex; align-items:center; gap:.75rem;
-    flex-shrink: 0; /* Evita que a logo encolha */
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+    color: #fff; /* Cor do texto da marca */
+    font-weight: 500;
 }
-.header .brand-logo { /* Logo pequena no cabeçalho */
-    width: 36px; /* Tamanho ajustado para o cabeçalho */
-    height: 36px;
-    background-image: var(--logo-header-src); /* Usando a nova variável */
+.header .brand-logo {
+    width: 100px;
+    height: 100px;
+    background-image: var(--logo-header-src);
     background-size: contain;
     background-repeat:no-repeat;
     background-position:center;
+    filter: brightness(0) invert(1); /* Deixa a logo branca */
 }
 .header .brand-name {
-    font-weight: 700;
-    letter-spacing: .2px;
-    color: var(--brand-dark);
-    font-size: 1.1rem;
-    display: none; /* Esconder o nome da marca ao lado da logo */
+    font-size: 1rem;
 }
 .menu {
     display:flex;
-    gap:1.5rem; /* Aumenta o espaçamento entre os itens do menu */
-    flex-grow: 1; /* Permite que o menu ocupe o espaço disponível */
-    justify-content: flex-start; /* Alinha o menu à esquerda */
-    align-items: center;
-    margin-left: 2rem; /* Espaçamento após a logo do header */
+    gap: 2rem;
 }
 .menu a {
-    padding: .5rem .75rem;
-    border-radius: 999px;
-    color: var(--muted);
+    color: #fff;
+    opacity: 0.8;
     font-weight: 500;
-    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
 }
 .menu a:hover {
-    background: rgba(3,59,64,.075);
-    color: var(--brand-dark);
+    opacity: 1;
 }
-.header .contact-button { /* Novo botão de contato no cabeçalho */
+.header .contact-button {
     background: var(--brand-dark);
     color: #fff;
-    padding: .6rem 1rem;
-    border-radius: 0.75rem;
+    padding: .6rem .6rem .6rem 1rem; /* Padding ajustado */
+    border-radius: 999px; /* Formato de pílula */
     font-weight: 600;
-    font-size: 0.95rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0; /* Evita que o botão encolha */
-    white-space: nowrap; /* Evita quebra de linha no número */
+    gap: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.3);
 }
-.header .contact-button:hover {
-    filter: brightness(1.1);
-}
-
-@media (max-width: 900px) {
-    .menu {
-        justify-content: flex-end; /* Alinha menu à direita em telas médias */
-        margin-left: 0;
-    }
-    .header .brand-name {
-        display: none; /* Esconder nome da marca em telas médias */
-    }
-}
-@media (max-width: 700px) {
-    .menu {
-        display: none; /* Esconde o menu em telas menores */
-    }
-    .nav {
-        justify-content: space-between; /* Ajusta o layout da nav */
-    }
+.header .contact-button .logo-in-button {
+    width: 28px;
+    height: 28px;
+    background-image: var(--logo-header-src);
+    background-size: contain;
+    filter: brightness(0) invert(1);
 }
 
-
-/* ================================================================ */
-/* ==== NOVA SEÇÃO HERO (LOGO SIMPLES + FRASE) - ==== */
-/* ================================================================ */
-
+/* ================= Hero (VERSÃO FINAL E CORRIGIDA) ================= */
 .hero {
-  background: var(--brand-light);
-  padding: 0;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end; 
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    background-image: var(--hero-bg-image);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 10vh; 
 }
-
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.5)); 
+}
 .hero-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
-  gap: 2rem;
-  align-items: center; /* Alinha os itens verticalmente ao centro */
-  min-height: calc(100vh - 53px);
-}
-
-.hero-text-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; /* <-- MUDADO AQUI: Centraliza o bloco */
-  padding-right: 2rem;
-}
-
-/* Novo estilo para a logo simples (monograma SB) */
-.hero-logo-simple {
-  width: 600px;  /* Tamanho da logo */
-  height: 600px;
-  background-image: var(--logo-header-src); /* Usa a mesma logo pequena do cabeçalho */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-bottom: 1.5rem; /* Espaço entre a logo e a frase */
-}
-
-/* Estilo para a frase "Compromisso, ética e resultado." */
-.hero-subtitle-phrase {
-  font-size: 20px; /* <-- NOVO TAMANHO. Ajuste este valor se precisar */
-  line-height: 1.1; /* Altura da linha ajustada para a nova fonte */
-  color: var(--brand-dark);
-  font-weight: 600;
-  text-align: left;
-  margin: 0;
-}
-
-.hero-image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.hero-image-container img {
-  display: block;
-  max-width: 100%;
-  max-height: 80vh; /* Limita a altura máxima da imagem */
-  width: auto;
-  height: auto;
-  object-fit: contain; /* Garante que a imagem inteira apareça sem cortes */
-  border-radius: 1.5rem; /* Bordas bem arredondadas */
-  box-shadow: 0 15px 40px rgba(3,59,64,.12);
-}
-
-/* NOVA VERSÃO PARA CELULAR - SUBSTITUA PELO CÓDIGO ABAIXO */
-@media (max-width: 900px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    min-height: auto;
-    padding: 4rem 1rem; /* Aumenta o espaçamento vertical e adiciona nas laterais */
-  }
-  .hero-text-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    padding-right: 0;
-  }
-  /* AUMENTA A LOGO NO CELULAR */
-  .hero-logo-simple {
-    width: 300px;
-    height: 300px;
-  }
-  /* AUMENTA A FRASE NO CELULAR */
-  .hero-subtitle-phrase {
-    text-align: center;
-    /* Usa a função clamp para um tamanho responsivo, mas com um mínimo maior */
-    font-size: clamp(2.2rem, 10vw, 2.8rem); 
-  }
-  .hero-image-container {
-    margin-top: 3rem; /* Aumenta o espaço entre o texto e a imagem */
-  }
+    gap: 1.5rem;
+    /* Adicionado para garantir que o contêiner possa se esticar se necessário */
+    width: 100%; 
 }
+.hero-logo {
+    width: 340px;
+    height: 340px;
+    background-image: var(--logo-header-src);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+    filter: brightness(0) invert(1);
+}
+.hero-tagline {
+    font-size: 38px; 
+    font-weight: 300;
+    line-height: 1.2;
+    /* Removido max-width para não limitar o alinhamento */
+    /* max-width: 30ch; */ 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    /* Garante a centralização do texto */
+    text-align: center; 
+}
+
 /* ================= Sections ================= */
 section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
 .section-title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin:0 0 1rem; color: var(--brand-dark); }
 .lead { color: var(--muted); max-width: 65ch; }
 
 /* About */
-.about { display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:center; }
+.about { display:grid; grid-template-columns: 0.9fr 1.1fr; gap:2rem; align-items:center; } /* <-- LINHA MODIFICADA */
 .about .image { border-radius: 1rem; overflow:hidden; box-shadow: 0 10px 30px rgba(3,59,64,.15); }
 @media (max-width: 900px){ .about { grid-template-columns: 1fr; } }
 
@@ -227,54 +203,143 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
 @media (max-width: 800px){ .team-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px){ .team-grid { grid-template-columns: 1fr; } }
 .lawyer { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; overflow:hidden; display:flex; flex-direction:column; background:#fff; }
-.lawyer .photo { aspect-ratio: 4/3; width:100%; object-fit: cover; object-position: center 20%; background:#eef3f3; } /* <-- VALOR ALTERADO PARA 20% */
+.lawyer .photo { aspect-ratio: 4/3; width:100%; object-fit: cover; object-position: center 20%; background:#eef3f3; }
 .lawyer .body { padding:1rem; display:flex; flex-direction:column; gap:.35rem; }
 .lawyer .name { font-weight: 700; color: var(--brand-dark); }
 .lawyer .oab { font-size:.92rem; color: var(--muted); }
 .lawyer .tags { margin:.25rem 0 .35rem; display:flex; flex-wrap:wrap; gap:.35rem; }
 .tag { font-size:.82rem; padding:.25rem .5rem; border-radius: 999px; background: rgba(202,170,138,.18); color:#b2b; border: 1px solid rgba(202,170,138,.55); }
 
+.lawyer .tags { 
+  display: none; 
+}
+
+/* Ajuste específico para a foto da Leandra Bogoni */
+.lawyer .photo.pos-leandra {
+  object-position: center 15%; /* Puxa a imagem um pouco mais para baixo */
+}
+
+/* Ajuste específico para a foto do Fausto Ouriques */
+.lawyer .photo.pos-fausto {
+  object-position: center 10%; /* Puxa a imagem ainda mais para baixo */
+}
+
 /* Contato */
 .contact { display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:start; }
 @media (max-width: 900px){ .contact { grid-template-columns: 1fr; } }
 .contact .card { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; padding:1rem; }
 
-/* Footer */
-.footer { background: #062b2d; color:#dfe7e7; padding:2rem 0; }
-.footer-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-.footer .brand-logo { filter: invert(1) saturate(0) brightness(2); opacity:.9; }
-.footer-brand-name {
-    font-weight: 700;
-    letter-spacing: .2px;
-    color: #fff; /* Cor do texto no footer */
-    font-size: 1.1rem;
+/* ================= Footer (NOVO LAYOUT) ================= */
+.footer {
+  background: #f7f7f7; /* Um cinza bem claro, como na referência */
+  color: var(--muted);
+  padding: 3rem 0 0; /* Mais padding no topo, sem padding embaixo */
+  font-size: 0.9rem;
+  border-top: 1px solid #e0e0e0;
 }
 
-/* ======================================= */
-/* ==== Animação de Flutuação (Float) ==== */
-/* ======================================= */
+.footer-content {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr; /* Duas colunas em tablets */
+  }
+}
+@media (max-width: 600px) {
+  .footer-content {
+    grid-template-columns: 1fr; /* Uma coluna em celulares */
+    text-align: center;
+  }
+}
+
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+@media (max-width: 600px) {
+  .footer-brand {
+    flex-direction: column; /* Logo acima do texto em celulares */
+    margin-bottom: 1rem;
+  }
+}
+
+.footer-logo {
+  width: 200px;
+  height: 200px;
+  background-image: var(--logo-header-src);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: auto;
+  flex-shrink: 0;
+}
+
+.brand-name-footer {
+  font-family: serif;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--brand-dark);
+  margin: 0;
+}
+.brand-name-footer small {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-title {
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.footer-column a {
+  text-decoration: underline;
+  text-decoration-color: rgba(0,0,0,0.2);
+  transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+  color: var(--brand-dark);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 2rem;
+}
+
+/* Animação de Flutuação (Float) */
 @keyframes floatAnimation {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px); /* O quão alto o botão vai subir */
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }
 
-/* ======================================= */
-/* ==== Botão WhatsApp Flutuante Aprimorado ==== */
-/* ======================================= */
+/* Botão WhatsApp Flutuante Aprimorado */
 .whatsapp {
   position: fixed;
   right: 18px;
   bottom: 18px;
   z-index: 1100;
 }
-
 .whatsapp a {
   display: inline-flex;
   align-items: center;
@@ -289,13 +354,10 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
   animation: floatAnimation 2.5s ease-in-out infinite;
   transition: transform 0.2s ease;
 }
-
 .whatsapp a:hover {
   transform: scale(1.05);
   animation-play-state: paused;
 }
-
-/* Ícone do WhatsApp (SVG embutido para garantir que sempre apareça) */
 .whatsapp a::before {
   content: "";
   width: 30px;
@@ -306,72 +368,7 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
   background-position: center;
 }
 
-/* Utilidades */
-.muted { color: var(--muted); }
-.spacer-xs{ height:.5rem; }
-.spacer-sm{ height:1rem; }
-.spacer-md{ height:1.5rem; }
-
-/* ======================================= */
-/* ==== Estilos do Formulário de Contato === */
-/* ======================================= */
-
-/* Organiza o formulário em uma coluna com espaçamento */
-.contact form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* Espaço entre os campos do formulário */
-}
-
-/* Estiliza os rótulos (Nome, E-mail, etc.) */
-.contact form label {
-  display: flex;
-  flex-direction: column; /* Coloca o texto do rótulo acima do campo */
-  gap: 0.4rem; /* Espaço entre o rótulo e o campo de digitação */
-  font-size: 0.9rem;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-/* Estilo base para todos os campos de digitação (input e textarea) */
-.contact form input,
-.contact form textarea {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid rgba(3, 59, 64, 0.2); /* Borda sutil com a cor da sua marca */
-  border-radius: 0.75rem; /* Mesma borda dos botões */
-  background-color: #f8fafc;
-  font-size: 1rem;
-  font-family: inherit; /* Usa a mesma fonte do site */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Efeito visual quando o usuário clica em um campo */
-.contact form input:focus,
-.contact form textarea:focus {
-  outline: none;
-  border-color: var(--brand-dark); /* Borda fica da cor principal */
-  box-shadow: 0 0 0 3px rgba(3, 59, 64, 0.1); /* Brilho suave ao redor */
-}
-
-/* Ajuste específico para a área de mensagem */
-.contact form textarea {
-  resize: vertical; /* Permite que o usuário aumente a altura, mas não a largura */
-  min-height: 120px;
-}
-
-/* Deixa o botão de envio com largura total e mais destaque */
-.contact form button.btn.primary {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.05rem;
-  margin-top: 0.5rem; /* Espaço extra acima do botão */
-}
-
-/* =============================== */
-/* ==== CÓDIGO DO MODAL ABAIXO === */
-/* =============================== */
-
+/* Código do Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -385,12 +382,10 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-
 .modal-overlay.visible {
   opacity: 1;
   visibility: visible;
 }
-
 .modal-content {
   background: var(--brand-dark);
   color: #fff;
@@ -402,11 +397,9 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
   transform: scale(0.95) translateY(10px);
   transition: transform 0.3s ease;
 }
-
 .modal-overlay.visible .modal-content {
   transform: scale(1) translateY(0);
 }
-
 .modal-close-btn {
   position: absolute;
   top: 1rem;
@@ -422,31 +415,18 @@ section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
 .modal-close-btn:hover {
   opacity: 1;
 }
-
-.modal-logo {
-  width: 250px;
-  height: 250px;
-  background-image: var(--logo-header-src);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: 0 auto 1rem;
-  filter: invert(1) saturate(0) brightness(2); /* Deixa a logo branca */
-}
-
 .modal-title {
   font-size: 1.5rem;
   margin: 0 0 0.5rem;
 }
-
 .modal-text {
   opacity: 0.9;
   line-height: 1.6;
   margin: 0 0 1rem;
 }
-
 .modal-text.examples {
   font-style: italic;
   opacity: 0.8;
   font-size: 0.95rem;
 }
+

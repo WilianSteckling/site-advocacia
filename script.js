@@ -74,3 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', revealOnScroll);
   revealOnScroll(); // Executa uma vez ao carregar a página
 });
+// Adiciona um ouvinte de evento que dispara quando a página é rolada
+window.addEventListener('scroll', function() {
+  // Seleciona o elemento do cabeçalho
+  const header = document.querySelector('.header');
+  
+  // Verifica se o usuário rolou a página mais de 10 pixels para baixo
+  if (window.scrollY > 10) {
+    // Se sim, adiciona a classe 'scrolled' ao cabeçalho
+    header.classList.add('scrolled');
+  } else {
+    // Se não (se estiver no topo), remove a classe 'scrolled'
+    header.classList.remove('scrolled');
+  }
+});
