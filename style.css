@@ -8,8 +8,9 @@
     --logo-header-src: url('imgs/logo-icon.png'); /* Caminho da logo pequena para o cabeçalho */
     --hero-bg-image: url('imgs/hero-mobile.jpeg');     /* Foto da equipe para o fundo */
     --hero-bg-image-mobile: url('imgs/hero-mobile.jpeg'); /* Imagem para celular */
-
+    --logo-menu-src: url('imgs/logo-cabecalho.png');
     /* VARIÁVEIS DE FONTE */
+    --logo-rodape-src: url('imgs/logo-rodapé.png'); 
     --font-title: 'Libre Baskerville', serif;
     --font-body: 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -26,6 +27,12 @@ html, body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; height: auto; border: 0; }
 
+/* ADICIONE ESTA NOVA REGRA */
+p {
+  text-align: justify;
+  hyphens: auto; /* Opcional: Ajuda a evitar grandes espaços entre as palavras */
+}
+
 .container { width: min(1200px, 92%); margin: 0 auto; }
 
 /* ================= Header (CORRIGIDO PARA FICAR FIXO) ================= */
@@ -37,7 +44,7 @@ img { max-width: 100%; height: auto; border: 0; }
     z-index: 1000;
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding: .25rem 0;
+    padding: .4rem 0;
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
@@ -76,7 +83,7 @@ img { max-width: 100%; height: auto; border: 0; }
 }
 .nav {
     display: flex;
-    align-items: center;
+    align-items: center; 
     justify-content: space-between;
 }
 .header .brand {
@@ -87,12 +94,12 @@ img { max-width: 100%; height: auto; border: 0; }
     font-weight: 500;
 }
 .header .brand-logo {
-    width: 120px;px;
-    height: 120px;
-    background-image: var(--logo-header-src);
-    background-size: contain;
-    background-repeat:no-repeat;
-    background-position:center;
+    width: 200px; /* AGORA, ESTA LINHA CONTROLA O TAMANHO REAL */
+    height: 80px; /* Mantemos uma altura para o cabeçalho */
+    background-size: 100% auto; 
+    background-image: var(--logo-menu-src);
+    background-repeat: no-repeat;
+    background-position: left center; /* Alinha a imagem à esquerda */
     transition: width 0.3s ease, height 0.3s ease;
 }
 .header .brand-name {
@@ -228,20 +235,20 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   display: grid;
   grid-template-columns: auto 1fr 1fr;
   gap: 2rem;
-  align-items: start;
+  align-items: center;
   padding-bottom: 2rem;
 }
 .footer-brand { display: flex; align-items: center; gap: 1rem; }
 .footer-logo {
   width: 300px;
   height: 300px;
-  background-image: var(--logo-header-src);
+  background-image: var(--logo-rodape-src);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   flex-shrink: 0;
 }
-.footer-column { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-column { display: flex; align-items: center; gap: 1.4em; }
 .footer-column a { text-decoration: underline; text-decoration-color: rgba(0,0,0,0.2); transition: color 0.2s ease; }
 .footer-column a:hover { color: var(--brand-dark); }
 .footer-bottom { text-align: center; padding: 1rem 0; font-size: 0.8rem; border-top: 1px solid #e0e0e0; margin-top: 2rem; }
@@ -367,8 +374,8 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         flex-grow: 1;
     }
     .header .brand-logo {
-        width: 42px;
-        height: 42px;
+        width: 120px;
+        height: 50px;
     }
 
     .about,
@@ -381,11 +388,23 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 
 @media (max-width: 600px) {
     .hero {
+        /* Define a imagem para mobile */
         background-image: var(--hero-bg-image-mobile);
-        background-size: cover;
+
+        /* A MUDANÇA PRINCIPAL: A imagem terá 100% da largura, e a altura será automática */
+        background-size: 100% auto;
+        
         background-repeat: no-repeat;
-        background-position: center 20%;
-        min-height: 80vh;
+        background-position: center top; /* Alinha no topo */
+        min-height: auto; /* Altura se ajusta ao conteúdo */
+        padding-top: 15vh; /* Espaçamento no topo */
+        padding-bottom: 15vh; /* Espaçamento embaixo */
+    }
+
+    /* REMOVEMOS A REGRA .hero::after COMPLETAMENTE */
+
+    .hero-content {
+        z-index: 1; /* Mantém o conteúdo na frente */
     }
 
     .hero-logo-img {
@@ -417,4 +436,3 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         margin-bottom: 1rem;
     }
 }
-
