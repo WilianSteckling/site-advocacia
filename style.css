@@ -7,7 +7,7 @@
     --bg: #ffffff;
     --logo-header-src: url('imgs/logo-icon.png'); /* Caminho da logo pequena para o cabeçalho */
     --hero-bg-image: url('imgs/hero-mobile.jpeg');     /* Foto da equipe para o fundo */
-    --hero-bg-image-mobile: url('imgs/hero-mobile.jpeg'); /* Imagem para celular */
+    --hero-bg-image-mobile: url('imgs/hero-desk.jpeg'); /* Imagem para celular */
     --logo-menu-src: url('imgs/logo-cabecalho.png');
     /* VARIÁVEIS DE FONTE */
     --logo-rodape-src: url('imgs/logo-rodapé.png'); 
@@ -185,12 +185,14 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
     margin:0 0 1rem; 
     color: var(--brand-dark); 
 }
-.lead { color: var(--muted); max-width: 65ch; }
 
 /* About */
-.about { display:grid; grid-template-columns: 0.9fr 1.1fr; gap:2rem; align-items:center; }
-.about .image { border-radius: 1rem; overflow:hidden; box-shadow: 0 10px 30px rgba(3,59,64,.15); }
-
+.about {
+  display: grid;
+  grid-template-columns: 1fr; /* Alterado para criar apenas UMA coluna */
+  gap: 2rem;
+  align-items: center;
+}
 /* Áreas de Atuação */
 .areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
 .area-card { border:1px solid rgba(3,59,64,.14); border-radius: .9rem; padding:1rem; transition: box-shadow .2s ease, transform .2s ease; cursor: pointer; }
@@ -227,31 +229,85 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 .footer {
   background: #f7f7f7;
   color: var(--muted);
-  padding: 3rem 0 0;
-  font-size: 0.9rem;
+  padding: 1.5rem 0 0; /* REDUZIDO: de 3rem para 1.5rem */
+  font-size: 0.85rem; /* UM POUCO MENOR: de 0.9rem para 0.85rem */
   border-top: 1px solid #e0e0e0;
 }
 .footer-content {
   display: grid;
   grid-template-columns: auto 1fr 1fr;
-  gap: 2rem;
+  gap: 1.5rem; /* REDUZIDO: de 2rem para 1.5rem */
   align-items: center;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem; /* REDUZIDO: de 2rem para 1.5rem */
 }
-.footer-brand { display: flex; align-items: center; gap: 1rem; }
+.footer-brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.75rem; /* Ligeiramente reduzido */
+  flex-direction: column; /* Faz o texto ficar abaixo do logo no rodapé */
+  text-align: center; /* Centraliza o texto */
+}
 .footer-logo {
-  width: 300px;
-  height: 300px;
+  width: 200px; /* REDUZIDO: de 300px para 200px */
+  height: 200px; /* REDUZIDO: de 300px para 200px */
   background-image: var(--logo-rodape-src);
-  background-size: cover;
+  background-size: contain; /* Ajusta para que o logo caiba sem cortar */
   background-repeat: no-repeat;
   background-position: center;
   flex-shrink: 0;
+  margin-bottom: 0.5rem; /* Adiciona um pequeno espaço entre logo e texto */
+}
+.footer-column { 
+  display: flex; 
+  /* flex-direction: column; */ /* Removido para manter em linha, se houver espaço */
+  align-items: flex-start; /* Alinha o conteúdo à esquerda */
+  gap: 0.5rem; /* Reduzido o espaçamento */
+  flex-direction: column; /* Força que o título e o texto fiquem em colunas */
+}
+.footer-column a { 
+  text-decoration: underline; 
+  text-decoration-color: rgba(0,0,0,0.2); 
+  transition: color 0.2s ease; 
+}
+.footer-column a:hover { 
+  color: var(--brand-dark); 
+}
+.footer-title {
+  font-size: 1em; /* Ajusta o tamanho do título para ser relativo ao pai */
+  margin: 0; /* Remove margens padrão */
+  color: var(--brand-dark); /* Deixa os títulos mais escuros */
+}
+.footer-column p { /* Adiciona estilo para o texto de Horário de atendimento */
+  margin: 0; /* Remove margens padrão */
+  line-height: 1.4;
+}
+.footer-bottom { 
+  text-align: center; 
+  padding: 0.75rem 0; /* REDUZIDO: de 1rem para 0.75rem */
+  font-size: 0.75rem; /* UM POUCO MENOR: de 0.8rem para 0.75rem */
+  border-top: 1px solid #e0e0e0; 
+  margin-top: 1rem; /* REDUZIDO: de 2rem para 1rem */
+}
+
+/* NOVO: Estilo para a marca no rodapé */
+.footer-brand .brand-name-footer {
+  font-family: var(--font-title);
+  font-size: 1rem; /* Ajuste conforme necessário */
+  line-height: 1.3;
+  color: var(--brand-dark); /* Cor escura para a marca */
+}
+.footer-brand .oab-footer {
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 .footer-column { display: flex; align-items: center; gap: 1.4em; }
 .footer-column a { text-decoration: underline; text-decoration-color: rgba(0,0,0,0.2); transition: color 0.2s ease; }
 .footer-column a:hover { color: var(--brand-dark); }
 .footer-bottom { text-align: center; padding: 1rem 0; font-size: 0.8rem; border-top: 1px solid #e0e0e0; margin-top: 2rem; }
+/* CORREÇÃO: Centraliza o texto de copyright no rodapé */
+.footer-bottom p {
+  text-align: center;
+}
 
 /* Animação de Flutuação (Float) */
 @keyframes floatAnimation {
@@ -271,13 +327,10 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: #25D366;
-  color: #fff;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
-  font-size: 0;
+  width: 50px; /* Tamanho da área de clique */
+  height: 50px; /* Tamanho da área de clique */
+  background: transparent; /* Fundo removido */
+  /* As linhas de border-radius e box-shadow foram removidas */
   animation: floatAnimation 2.5s ease-in-out infinite;
   transition: transform 0.2s ease;
 }
@@ -287,20 +340,54 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 }
 .whatsapp a::before {
   content: "";
-  width: 30px;
-  height: 30px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23ffffff' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 221.9-99.6 221.9-222 .1-59.3-25.1-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.2-27.9l-6.9-4.1-72.1 18.9L99 353.5l-4.5-7.3c-18.9-30.1-29.6-65.4-29.6-101.8 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z'/%3E%3C/svg%3E");
+  width: 48px; /* Ícone maior */
+  height: 48px; /* Ícone maior */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%2325D366' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 221.9-99.6 221.9-222 .1-59.3-25.1-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.2-27.9l-6.9-4.1-72.1 18.9L99 353.5l-4.5-7.3c-18.9-30.1-29.6-65.4-29.6-101.8 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22)); /* ADICIONADO: Sombra mais suave no próprio ícone */
 }
 
-/* Código do Modal */
+/* ======================== */
+/* ÁREAS DE ATUAÇÃO (PARA MODAL) */
+/* ======================== */
+
+.areas-interactive-grid { 
+    display:grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap:1rem; 
+}
+.area-item { 
+    border:1px solid rgba(3,59,64,.14); /* Adicionei uma borda para visual */
+    border-radius: .9rem; 
+    padding:1.5rem; /* Ajuste o padding para o conteúdo caber */
+    transition: box-shadow .2s ease, transform .2s ease; 
+    cursor: pointer; 
+    background: #fff; /* Fundo branco para os cards */
+    display: flex; /* Para centralizar o texto dentro do card */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80px; /* Garante uma altura mínima para os cards */
+    font-weight: 600;
+    color: var(--brand-dark);
+    font-size: 1.1em;
+    animation: pulseEffect 2.5s infinite ease-in-out;
+}
+.area-item:hover { 
+    box-shadow: 0 10px 22px rgba(3,59,64,.12); 
+    transform: translateY(-2px); 
+}
+
+/* ======================== */
+/* ESTILOS DO MODAL */
+/* ======================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(3, 59, 64, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(3, 59, 64, 0.7); /* Fundo semi-transparente */
+  backdrop-filter: blur(4px); /* Efeito de desfoque */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,11 +401,11 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   visibility: visible;
 }
 .modal-content {
-  background: var(--brand-dark);
-  color: #fff;
-  padding: 2rem;
+  background: var(--brand-dark); /* Fundo verde escuro, como na imagem 2 */
+  color: #fff; /* Texto branco */
+  padding: 2.5rem 2rem; /* Aumentei um pouco o padding para combinar com a imagem 2 */
   border-radius: 1rem;
-  width: min(600px, 90%);
+  width: min(700px, 90%); /* Aumentei a largura máxima */
   position: relative;
   text-align: center;
   transform: scale(0.95) translateY(10px);
@@ -338,25 +425,49 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   font-size: 1.75rem;
   line-height: 1;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 .modal-close-btn:hover {
   opacity: 1;
 }
 .modal-title {
-  font-size: 1.5rem;
-  margin: 0 0 0.5rem;
+  font-family: var(--font-title); /* Usa a fonte de título para o modal */
+  font-size: 1.8rem; /* Título maior */
+  margin: 0 0 0.8rem;
+  color: #fff; /* Garante que o título seja branco */
 }
 .modal-text {
   opacity: 0.9;
   line-height: 1.6;
-  margin: 0 0 1rem;
+  margin: 0 auto 1rem; /* Centraliza e ajusta margem */
+  max-width: 90%; /* Limita a largura do texto para melhor leitura */
+  color: #e0e0e0; /* Cor do texto um pouco mais suave */
 }
 .modal-text.examples {
   font-style: italic;
   opacity: 0.8;
   font-size: 0.95rem;
+  color: #ccc; /* Cor um pouco mais clara para exemplos */
 }
 
+/* Media query para responsividade dos cards */
+@media (max-width: 900px) {
+  .areas-interactive-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+  }
+}
+@media (max-width: 600px) {
+  .areas-interactive-grid {
+    grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+  }
+  .modal-content {
+    padding: 2rem 1rem; /* Ajusta padding do modal em mobile */
+    width: 95%;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+  }
+}
 /* ======================================================= */
 /* ==== Media Queries para Responsividade (Mobile) ==== */
 /* ======================================================= */
@@ -387,19 +498,22 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 }
 
 @media (max-width: 600px) {
-    .hero {
-        /* Define a imagem para mobile */
-        background-image: var(--hero-bg-image-mobile);
-
-        /* A MUDANÇA PRINCIPAL: A imagem terá 100% da largura, e a altura será automática */
-        background-size: 100% auto;
-        
-        background-repeat: no-repeat;
-        background-position: center top; /* Alinha no topo */
-        min-height: auto; /* Altura se ajusta ao conteúdo */
-        padding-top: 15vh; /* Espaçamento no topo */
-        padding-bottom: 15vh; /* Espaçamento embaixo */
-    }
+   .hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* cobre toda a altura da tela */
+  background-image: var(--hero-bg-image-mobile); /* substitua pelo caminho da sua imagem */
+  background-size: cover; /* cobre toda a área sem distorcer */
+  background-position: center; /* centraliza a imagem */
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* posiciona o texto na parte inferior */
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  padding-bottom: 50px;
+}
 
     /* REMOVEMOS A REGRA .hero::after COMPLETAMENTE */
 
@@ -436,3 +550,144 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         margin-bottom: 1rem;
     }
 }
+
+/* ===================== */
+/* AJUSTES SEÇÃO EQUIPE  */
+/* ===================== */
+
+#equipe .team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  justify-items: center;
+}
+
+/* Cada advogado (card) */
+#equipe .lawyer .photo {
+    width: 100%; /* Faz a imagem ocupar toda a largura do card */
+    max-width: none; /* Remove o limite de largura de 320px */
+    margin: 0; /* Remove as margens */
+    display: block;
+    border-radius: 0; /* O arredondamento já está no card pai (.lawyer) */
+}
+
+#equipe .lawyer:hover {
+  transform: translateY(-5px);
+}
+
+#equipe .lawyer .photo {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #eee;
+}
+
+#equipe .lawyer .body {
+  padding: 1.5rem;
+  text-align: justify;
+}
+
+#equipe .lawyer .name {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #033b40;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+#equipe .lawyer .oab {
+  font-weight: 600;
+  color: #777;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#equipe .lawyer p {
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===================== */
+/* DESKTOP - GRID 2x2    */
+/* ===================== */
+@media (min-width: 992px) {
+  #equipe .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    row-gap: 4rem;
+    align-items: start;
+  }
+
+  #equipe .lawyer {
+    max-width: 95%;
+  }
+
+  /* ESTA É A REGRA CORRIGIDA PARA A IMAGEM */
+  #equipe .lawyer .photo {
+    width: 100%; /* Ocupa toda a largura do card */
+    max-width: none; /* Remove o limite máximo de largura */
+    margin: 0; /* Remove as margens */
+    display: block;
+    border-radius: 0; /* O arredondamento fica no card pai (.lawyer) */
+  }
+
+  #equipe .lawyer .body {
+    padding: 1.5rem; /* Garante um bom espaçamento interno */
+  }
+
+  #equipe .lawyer p {
+    font-size: 1.05em;
+    line-height: 1.7;
+  }
+}
+
+/* ======================================= */
+/* ANIMAÇÃO DE PULSAÇÃO PARA ÁREAS DE ATUAÇÃO */
+/* ======================================= */
+@keyframes pulseEffect {
+  0% {
+    box-shadow: 0 5px 15px rgba(3, 59, 64, 0.08);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 10px 22px rgba(3, 59, 64, 0.12);
+    transform: translateY(-3px); /* Sobe um pouco para dar destaque */
+  }
+  100% {
+    box-shadow: 0 5px 15px rgba(3, 59, 64, 0.08);
+    transform: translateY(0);
+  }
+}
+
+/* ================================================= */
+/* ANIMAÇÃO INDIVIDUAL E SUAVE PARA CADA BOTÃO       */
+/* ================================================= */
+
+/* Linha 1 */
+.areas-interactive-grid .area-item:nth-child(1) { animation-delay: 0.1s; }
+.areas-interactive-grid .area-item:nth-child(2) { animation-delay: 0.2s; }
+.areas-interactive-grid .area-item:nth-child(3) { animation-delay: 0.3s; }
+
+/* Linha 2 */
+.areas-interactive-grid .area-item:nth-child(4) { animation-delay: 0.2s; }
+.areas-interactive-grid .area-item:nth-child(5) { animation-delay: 0.3s; }
+.areas-interactive-grid .area-item:nth-child(6) { animation-delay: 0.4s; }
+
+/* Linha 3 */
+.areas-interactive-grid .area-item:nth-child(7) { animation-delay: 0.3s; }
+.areas-interactive-grid .area-item:nth-child(8) { animation-delay: 0.4s; }
+.areas-interactive-grid .area-item:nth-child(9) { animation-delay: 0.5s; }
+
+/* Linha 4 */
+.areas-interactive-grid .area-item:nth-child(10) { animation-delay: 0.4s; }
+.areas-interactive-grid .area-item:nth-child(11) { animation-delay: 0.5s; }
+.areas-interactive-grid .area-item:nth-child(12) { animation-delay: 0.6s; }
+
+/* Linha 5 */
+.areas-interactive-grid .area-item:nth-child(13) { animation-delay: 0.5s; }
+.areas-interactive-grid .area-item:nth-child(14) { animation-delay: 0.6s; }
+.areas-interactive-grid .area-item:nth-child(15) { animation-delay: 0.7s; }
+
+/* Linha 6 */
+.areas-interactive-grid .area-item:nth-child(16) { animation-delay: 0.6s; }
+.areas-interactive-grid .area-item:nth-child(17) { animation-delay: 0.7s; }
+.areas-interactive-grid .area-item:nth-child(18) { animation-delay: 0.8s; }

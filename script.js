@@ -1,20 +1,25 @@
+// =======================================================
+// SCRIPT.JS - VERSÃO ATUALIZADA PARA MODAL
+// =======================================================
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- LÓGICA DO MODAL DAS ÁREAS DE ATUAÇÃO ---
   const modal = document.getElementById('areaModal');
   const closeModalBtn = document.getElementById('closeModal');
-  const areaCards = document.querySelectorAll('.area-card');
+  // Agora selecionamos os itens da área de atuação como ativadores do modal
+  const areaItems = document.querySelectorAll('.area-item'); 
 
   const modalTitle = document.getElementById('modalTitle');
   const modalDescription = document.getElementById('modalDescription');
   const modalExamples = document.getElementById('modalExamples');
 
   // Função para abrir o modal
-  const openModal = (card) => {
-    // Pega os dados do card clicado
-    const title = card.dataset.title;
-    const description = card.dataset.description;
-    const examples = card.dataset.examples;
+  const openModal = (item) => {
+    // Pega os dados dos atributos data- do item clicado
+    const title = item.dataset.title;
+    const description = item.dataset.description;
+    const examples = item.dataset.examples; // Certifique-se que o HTML tenha este atributo
 
     // Popula o modal com os dados
     modalTitle.textContent = title;
@@ -23,22 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Exibe o modal
     modal.classList.add('visible');
+    document.body.style.overflow = 'hidden'; // Evita rolagem da página por trás do modal
   };
 
   // Função para fechar o modal
   const closeModal = () => {
     modal.classList.remove('visible');
+    document.body.style.overflow = ''; // Restaura a rolagem da página
   };
 
-  // Adiciona o evento de clique em cada card
-  areaCards.forEach(card => {
-    card.addEventListener('click', () => openModal(card));
+  // Adiciona o evento de clique em cada ITEM (não mais no toggle)
+  areaItems.forEach(item => {
+    item.addEventListener('click', () => openModal(item));
   });
 
   // Eventos para fechar o modal
   closeModalBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (event) => {
-    // Fecha somente se o clique for no fundo (overlay)
+    // Fecha somente se o clique for no fundo (overlay), não no conteúdo do modal
     if (event.target === modal) {
       closeModal();
     }
@@ -74,17 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', revealOnScroll);
   revealOnScroll(); // Executa uma vez ao carregar a página
 });
-// Adiciona um ouvinte de evento que dispara quando a página é rolada
+
+// --- CONTROLE DO HEADER AO ROLAR A PÁGINA ---
 window.addEventListener('scroll', function() {
-  // Seleciona o elemento do cabeçalho
   const header = document.querySelector('.header');
-  
-  // Verifica se o usuário rolou a página mais de 10 pixels para baixo
   if (window.scrollY > 10) {
-    // Se sim, adiciona a classe 'scrolled' ao cabeçalho
     header.classList.add('scrolled');
   } else {
-    // Se não (se estiver no topo), remove a classe 'scrolled'
     header.classList.remove('scrolled');
   }
 });
