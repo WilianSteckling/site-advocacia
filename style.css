@@ -31,6 +31,10 @@ img { max-width: 100%; height: auto; border: 0; }
 p {
   text-align: justify;
   hyphens: auto; /* Opcional: Ajuda a evitar grandes espaços entre as palavras */
+  font-size: 1.14rem; /* Ajuste o valor conforme sua preferência, 1rem é o padrão */
+  line-height: 1.7;
+  text-indent: 0;
+  margin-bottom: 1.5rem;
 }
 
 .container { width: min(1200px, 92%); margin: 0 auto; }
@@ -146,12 +150,7 @@ p {
     background-position: center;
     padding-bottom: 10vh; 
 }
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.5)); 
-}
+
 .hero-content {
     position: relative;
     display: flex;
@@ -229,16 +228,19 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 .footer {
   background: #f7f7f7;
   color: var(--muted);
-  padding: 1.5rem 0 0; /* REDUZIDO: de 3rem para 1.5rem */
-  font-size: 0.85rem; /* UM POUCO MENOR: de 0.9rem para 0.85rem */
+  padding: 1rem 0 0; 
+  font-size: 0.8rem; 
   border-top: 1px solid #e0e0e0;
 }
 .footer-content {
   display: grid;
   grid-template-columns: auto 1fr 1fr;
-  gap: 1.5rem; /* REDUZIDO: de 2rem para 1.5rem */
+  gap: 1.0rem; 
   align-items: center;
-  padding-bottom: 1.5rem; /* REDUZIDO: de 2rem para 1.5rem */
+  padding-bottom: 1.5rem; 
+  justify-content: center; 
+  max-width: 900px; /* Ajuste este valor (ex: 900px) conforme o tamanho desejado */
+  margin: 0 auto;
 }
 .footer-brand { 
   display: flex; 
@@ -248,8 +250,8 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   text-align: center; /* Centraliza o texto */
 }
 .footer-logo {
-  width: 200px; /* REDUZIDO: de 300px para 200px */
-  height: 200px; /* REDUZIDO: de 300px para 200px */
+  width: 70px; 
+  height: 70px; 
   background-image: var(--logo-rodape-src);
   background-size: contain; /* Ajusta para que o logo caiba sem cortar */
   background-repeat: no-repeat;
@@ -259,10 +261,10 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 }
 .footer-column { 
   display: flex; 
-  /* flex-direction: column; */ /* Removido para manter em linha, se houver espaço */
   align-items: flex-start; /* Alinha o conteúdo à esquerda */
   gap: 0.5rem; /* Reduzido o espaçamento */
   flex-direction: column; /* Força que o título e o texto fiquem em colunas */
+  text-align: center; 
 }
 .footer-column a { 
   text-decoration: underline; 
@@ -276,17 +278,22 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   font-size: 1em; /* Ajusta o tamanho do título para ser relativo ao pai */
   margin: 0; /* Remove margens padrão */
   color: var(--brand-dark); /* Deixa os títulos mais escuros */
+  text-align: center;
 }
-.footer-column p { /* Adiciona estilo para o texto de Horário de atendimento */
-  margin: 0; /* Remove margens padrão */
-  line-height: 1.4;
+.footer-column p { 
+ margin: 0; 
+line-height: 1.4;
+    /* NOVO: Garante que a fonte dos parágrafos da coluna use o tamanho do footer (0.8rem) */
+font-size: 1em; /* 1em herda o 0.8rem do .footer pai */
+    /* NOVO: Alinha o texto à esquerda, consistente com o endereço */
+    text-align: center;
 }
 .footer-bottom { 
   text-align: center; 
   padding: 0.75rem 0; /* REDUZIDO: de 1rem para 0.75rem */
   font-size: 0.75rem; /* UM POUCO MENOR: de 0.8rem para 0.75rem */
   border-top: 1px solid #e0e0e0; 
-  margin-top: 1rem; /* REDUZIDO: de 2rem para 1rem */
+  margin-top: 0.3rem; 
 }
 
 /* NOVO: Estilo para a marca no rodapé */
@@ -300,13 +307,14 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   font-size: 0.85rem;
   color: var(--muted);
 }
-.footer-column { display: flex; align-items: center; gap: 1.4em; }
+
 .footer-column a { text-decoration: underline; text-decoration-color: rgba(0,0,0,0.2); transition: color 0.2s ease; }
 .footer-column a:hover { color: var(--brand-dark); }
 .footer-bottom { text-align: center; padding: 1rem 0; font-size: 0.8rem; border-top: 1px solid #e0e0e0; margin-top: 2rem; }
 /* CORREÇÃO: Centraliza o texto de copyright no rodapé */
 .footer-bottom p {
   text-align: center;
+  font-size: 1em; 
 }
 
 /* Animação de Flutuação (Float) */
@@ -508,14 +516,13 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* posiciona o texto na parte inferior */
+  justify-content: center;
   align-items: center;
   color: #fff;
   text-align: center;
   padding-bottom: 50px;
 }
 
-    /* REMOVEMOS A REGRA .hero::after COMPLETAMENTE */
 
     .hero-content {
         z-index: 1; /* Mantém o conteúdo na frente */
@@ -560,6 +567,8 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   grid-template-columns: 1fr;
   gap: 3rem;
   justify-items: center;
+  width: 100%; 
+  margin: 0; 
 }
 
 /* Cada advogado (card) */
@@ -572,7 +581,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 }
 
 #equipe .lawyer:hover {
-  transform: translateY(-5px);
+  transform: translateY(0px);
 }
 
 #equipe .lawyer .photo {
@@ -604,6 +613,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 #equipe .lawyer p {
   line-height: 1.6;
   color: #333;
+  font-size: 1.0rem;
 }
 
 /* ===================== */
@@ -615,10 +625,8 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
     column-gap: 3rem;
     row-gap: 4rem;
     align-items: start;
-  }
-
-  #equipe .lawyer {
-    max-width: 95%;
+    width: 100%; 
+    margin: 0; 
   }
 
   /* ESTA É A REGRA CORRIGIDA PARA A IMAGEM */
@@ -635,10 +643,13 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   }
 
   #equipe .lawyer p {
-    font-size: 1.05em;
+    font-size: 1.14em;
     line-height: 1.7;
+    text-indent: 1.5rem;
   }
 }
+
+
 
 /* ======================================= */
 /* ANIMAÇÃO DE PULSAÇÃO PARA ÁREAS DE ATUAÇÃO */
@@ -691,3 +702,13 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 .areas-interactive-grid .area-item:nth-child(16) { animation-delay: 0.6s; }
 .areas-interactive-grid .area-item:nth-child(17) { animation-delay: 0.7s; }
 .areas-interactive-grid .area-item:nth-child(18) { animation-delay: 0.8s; }
+
+/* CORREÇÃO DE ANCORAGEM PARA CABEÇALHO FIXO */
+/* Aplica um espaçamento de 100px no topo ao rolar para uma âncora (ID de seção) */
+section[id] {
+    scroll-margin-top: 100px; 
+}
+/* Se houver outras divs importantes com ID que são alvos, adicione-as aqui. Exemplo: */
+.contact[id] {
+    scroll-margin-top: 100px;
+}
