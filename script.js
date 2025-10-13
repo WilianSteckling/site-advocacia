@@ -91,3 +91,42 @@ window.addEventListener('scroll', function() {
     header.classList.remove('scrolled');
   }
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Seleciona todos os elementos que devem ser revelados
+    const revealElements = document.querySelectorAll('.reveal-item');
+
+    // 2. Opções de configuração para o Intersection Observer
+    // rootMargin: '0px 0px -100px 0px' significa que o elemento será
+    // revelado 100px ANTES de chegar ao fundo da tela, dando um efeito
+    // mais suave e antecipado.
+    const observerOptions = {
+        root: null, // viewport como root
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.1 // O callback será executado quando 10% do elemento estiver visível
+    };
+
+    // 3. Função de Callback que será executada quando a intersecção ocorrer
+    const revealCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            // Se o elemento estiver visível (intersecting é true)
+            if (entry.isIntersecting) {
+                // Adiciona a classe 'visible' para iniciar a transição CSS
+                entry.target.classList.add('visible');
+                
+                // Opcional: Para que a animação ocorra apenas uma vez, 
+                // paramos de observar o elemento depois de animado
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    // 4. Cria e inicia o observador
+    const observer = new IntersectionObserver(revealCallback, observerOptions);
+
+    // 5. Itera sobre todos os elementos e inicia a observação
+    revealElements.forEach(element => {
+        observer.observe(element);
+    });
+});

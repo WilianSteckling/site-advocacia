@@ -37,7 +37,12 @@ p {
   margin-bottom: 1.5rem;
 }
 
-.container { width: min(1200px, 92%); margin: 0 auto; }
+.container { 
+ max-width: 1200px; 
+ margin: 0 auto; 
+ width: 100%;
+}
+
 
 /* ================= Header (CORRIGIDO PARA FICAR FIXO) ================= */
 .header {
@@ -174,7 +179,18 @@ p {
 }
 
 /* ================= Sections ================= */
-section { padding: clamp(2.5rem, 6vw, 4.25rem) 0; }
+section { 
+ padding-top: clamp(2.5rem, 6vw, 4.25rem);
+ padding-bottom: clamp(2.5rem, 6vw, 4.25rem);
+ /* O padding horizontal garantirá o respiro nas laterais em telas pequenas */
+ padding-left: clamp(1rem, 4vw, 2rem); 
+ padding-right: clamp(1rem, 4vw, 2rem); 
+}
+
+#sobre {
+ background: linear-gradient( 45deg, #F7F3EF 0%, #C9A989 100% );
+}
+
 .section-bg-alt { background-color: var(--brand-light); }
 h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer, .area-card h3 {
     font-family: var(--font-title);
@@ -187,10 +203,10 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 
 /* About */
 .about {
-  display: grid;
-  grid-template-columns: 1fr; /* Alterado para criar apenas UMA coluna */
-  gap: 2rem;
-  align-items: center;
+ display: grid;
+ grid-template-columns: 1fr; /* Garante que sempre use 1 coluna */
+ gap: 2rem;
+ align-items: center;
 }
 /* Áreas de Atuação */
 .areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
@@ -233,15 +249,16 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   border-top: 1px solid #e0e0e0;
 }
 .footer-content {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  gap: 1.0rem; 
-  align-items: center;
-  padding-bottom: 1.5rem; 
-  justify-content: center; 
-  max-width: 900px; /* Ajuste este valor (ex: 900px) conforme o tamanho desejado */
-  margin: 0 auto;
+   display: flex; /* Usamos Flexbox, que é mais flexível para alinhamento em uma linha */
+   justify-content: space-around; /* Distribui as colunas horizontalmente com espaçamento uniforme */
+   align-items: center; /* ALINHA VERTICALMENTE AS COLUNAS NO CENTRO */
+   gap: 2rem; 
+   padding-top: 2.5rem; /* Aumentei um pouco o padding */  
+   padding-bottom: 2.5rem; 
+   max-width: 1200px; /* Usa a largura padrão do container */
+   margin: 0 auto;
 }
+
 .footer-brand { 
   display: flex; 
   align-items: center; 
@@ -261,32 +278,27 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 }
 .footer-column { 
   display: flex; 
-  align-items: flex-start; /* Alinha o conteúdo à esquerda */
-  gap: 0.5rem; /* Reduzido o espaçamento */
-  flex-direction: column; /* Força que o título e o texto fiquem em colunas */
-  text-align: center; 
+  align-items: center; /* ALINHA VERTICALMENTE O CONTEÚDO DENTRO DA COLUNA */
+  gap: 0.5rem; 
+  flex-direction: column; 
+  text-align: center; /* Centraliza o texto */
+  flex-basis: 40%; /* Sugestão para dar espaço a cada coluna e quebrar em mobile */
+  flex-grow: 1; /* Permite que cresçam para preencher */
+  max-width: 45%; /* Limita para não ficarem muito grandes em telas largas */
 }
-.footer-column a { 
-  text-decoration: underline; 
-  text-decoration-color: rgba(0,0,0,0.2); 
-  transition: color 0.2s ease; 
-}
-.footer-column a:hover { 
-  color: var(--brand-dark); 
-}
+
+.footer-column a,
+.footer-column p,
 .footer-title {
-  font-size: 1em; /* Ajusta o tamanho do título para ser relativo ao pai */
-  margin: 0; /* Remove margens padrão */
-  color: var(--brand-dark); /* Deixa os títulos mais escuros */
-  text-align: center;
+ text-align: center; 
+ margin: 0;
 }
+
+/* AJUSTE PARA O PARÁGRAFO */
 .footer-column p { 
- margin: 0; 
-line-height: 1.4;
-    /* NOVO: Garante que a fonte dos parágrafos da coluna use o tamanho do footer (0.8rem) */
-font-size: 1em; /* 1em herda o 0.8rem do .footer pai */
-    /* NOVO: Alinha o texto à esquerda, consistente com o endereço */
-    text-align: center;
+ line-height: 1.4;
+ font-size: 1em; 
+ margin: 0; /* Garante que p não tenha margin-bottom padrão */
 }
 .footer-bottom { 
   text-align: center; 
@@ -463,6 +475,27 @@ font-size: 1em; /* 1em herda o 0.8rem do .footer pai */
   .areas-interactive-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
   }
+  .footer-content {
+    flex-direction: column; /* Empilha as colunas verticalmente */
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem; /* Espaçamento entre colunas empilhadas */
+   }
+
+  .footer-columns-wrapper {
+     grid-template-columns: 1fr; /* CORREÇÃO: Endereço e Horário ficam EMPILHADOS */
+     gap: 1.5rem;
+    }
+    
+    .footer-brand,
+    .footer-column { 
+       max-width: 100%; /* Ocupa toda a largura disponível */
+    }
+    .footer-column p,
+    .footer-column a,
+    .footer-title {
+        text-align: center; 
+    }
 }
 @media (max-width: 600px) {
   .areas-interactive-grid {
@@ -649,60 +682,6 @@ font-size: 1em; /* 1em herda o 0.8rem do .footer pai */
   }
 }
 
-
-
-/* ======================================= */
-/* ANIMAÇÃO DE PULSAÇÃO PARA ÁREAS DE ATUAÇÃO */
-/* ======================================= */
-@keyframes pulseEffect {
-  0% {
-    box-shadow: 0 5px 15px rgba(3, 59, 64, 0.08);
-    transform: translateY(0);
-  }
-  50% {
-    box-shadow: 0 10px 22px rgba(3, 59, 64, 0.12);
-    transform: translateY(-3px); /* Sobe um pouco para dar destaque */
-  }
-  100% {
-    box-shadow: 0 5px 15px rgba(3, 59, 64, 0.08);
-    transform: translateY(0);
-  }
-}
-
-/* ================================================= */
-/* ANIMAÇÃO INDIVIDUAL E SUAVE PARA CADA BOTÃO       */
-/* ================================================= */
-
-/* Linha 1 */
-.areas-interactive-grid .area-item:nth-child(1) { animation-delay: 0.1s; }
-.areas-interactive-grid .area-item:nth-child(2) { animation-delay: 0.2s; }
-.areas-interactive-grid .area-item:nth-child(3) { animation-delay: 0.3s; }
-
-/* Linha 2 */
-.areas-interactive-grid .area-item:nth-child(4) { animation-delay: 0.2s; }
-.areas-interactive-grid .area-item:nth-child(5) { animation-delay: 0.3s; }
-.areas-interactive-grid .area-item:nth-child(6) { animation-delay: 0.4s; }
-
-/* Linha 3 */
-.areas-interactive-grid .area-item:nth-child(7) { animation-delay: 0.3s; }
-.areas-interactive-grid .area-item:nth-child(8) { animation-delay: 0.4s; }
-.areas-interactive-grid .area-item:nth-child(9) { animation-delay: 0.5s; }
-
-/* Linha 4 */
-.areas-interactive-grid .area-item:nth-child(10) { animation-delay: 0.4s; }
-.areas-interactive-grid .area-item:nth-child(11) { animation-delay: 0.5s; }
-.areas-interactive-grid .area-item:nth-child(12) { animation-delay: 0.6s; }
-
-/* Linha 5 */
-.areas-interactive-grid .area-item:nth-child(13) { animation-delay: 0.5s; }
-.areas-interactive-grid .area-item:nth-child(14) { animation-delay: 0.6s; }
-.areas-interactive-grid .area-item:nth-child(15) { animation-delay: 0.7s; }
-
-/* Linha 6 */
-.areas-interactive-grid .area-item:nth-child(16) { animation-delay: 0.6s; }
-.areas-interactive-grid .area-item:nth-child(17) { animation-delay: 0.7s; }
-.areas-interactive-grid .area-item:nth-child(18) { animation-delay: 0.8s; }
-
 /* CORREÇÃO DE ANCORAGEM PARA CABEÇALHO FIXO */
 /* Aplica um espaçamento de 100px no topo ao rolar para uma âncora (ID de seção) */
 section[id] {
@@ -712,3 +691,32 @@ section[id] {
 .contact[id] {
     scroll-margin-top: 100px;
 }
+
+@media (min-width: 901px) {
+    .about {
+        max-width: 800px; /* Limita o texto para melhor legibilidade no desktop */
+        margin: 0 auto; /* Centraliza esse bloco limitado */
+    }
+}
+
+/* ======================================= */
+/* EFEITO SCROLL REVEAL (REVELAÇÃO AO ROLAR) */
+/* ======================================= */
+
+/* 1. CLASSE BASE: Define o estado inicial do elemento (invisível e ligeiramente para baixo) */
+.reveal-item {
+    /* 1.1 Estado Inicial */
+    opacity: 0; /* Totalmente invisível */
+    transform: translateY(20px); /* Move 20px para baixo da posição final */
+
+    /* 1.2 Transição Suave */
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), /* Curva de animação suave */
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.reveal-item.visible {
+    opacity: 1; /* Totalmente visível */
+    transform: translateY(0); /* Volta para a posição original */
+}
+

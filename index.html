@@ -35,18 +35,19 @@
     <section id="inicio" class="hero">
         <div class="container hero-content">
             <div class="hero-logo"></div>
-            <h1 class="hero-tagline">Compromisso, ética e resultado.</h1>
+            <!-- INCLUSÃO: Efeito reveal no H1 -->
+            <h1 class="hero-tagline reveal-item">Compromisso, ética e resultado.</h1>
         </div>
     </section>
 
-    <section id="sobre">
-    <div class="container about">
-      <div>
-        <h2 class="section-title">Sobre o escritório</h2>
-        <p class="lead">SILVÉRIO BALDISSERA ADVOGADOS é um escritório de advocacia com mais de 30 anos de experiência, comprometido com a excelência na prestação de serviços jurídicos nas mais diversas áreas do Direito. Atuamos de forma estratégica e personalizada, sempre pautados pelos pilares que nos definem: compromisso, ética e resultado.</p>
+    <section id="sobre" class="section-bg-sobre"> <!-- Classe para o degradê da sugestão anterior -->
+     <div class="container"> <div class="about-content"> <div>
+        <!-- INCLUSÃO: Efeito reveal nos títulos e textos da seção "Sobre" -->
+        <h2 class="section-title reveal-item">Sobre o escritório</h2>
+        <p class="lead reveal-item">SILVÉRIO BALDISSERA ADVOGADOS é um escritório de advocacia com mais de 30 anos de experiência, comprometido com a excelência na prestação de serviços jurídicos nas mais diversas áreas do Direito. Atuamos de forma estratégica e personalizada, sempre pautados pelos pilares que nos definem: compromisso, ética e resultado.</p>
         <div class="spacer-sm"></div>
-        <p>Nosso time é formado por advogados experientes e atualizados, prontos para oferecer soluções eficazes e seguras, seja no consultivo, no contencioso ou na mediação de conflitos. Atendemos clientes em todo o território nacional, com dedicação, clareza e foco nos interesses do cliente.</p>
-        <p>Mais do que assessoria jurídica, oferecemos confiança, agilidade e responsabilidade em cada etapa da nossa atuação. O diferencial está em entender a necessidade de cada cliente e entregar, com integridade, os melhores caminhos para seus objetivos.</p>
+        <p class="reveal-item">Nosso time é formado por advogados experientes e atualizados, prontos para oferecer soluções eficazes e seguras, seja no consultivo, no contencioso ou na mediação de conflitos. Atendemos clientes em todo o território nacional, com dedicação, clareza e foco nos interesses do cliente.</p>
+        <p class="reveal-item">Mais do que assessoria jurídica, oferecemos confiança, agilidade e responsabilidade em cada etapa da nossa atuação. O diferencial está em entender a necessidade de cada cliente e entregar, com integridade, os melhores caminhos para seus objetivos.</p>
       </div>
       </figure>
     </div>
@@ -54,11 +55,13 @@
 
     <section id="equipe">
       <div class="container">
-        <h2 class="section-title reveal">Nossa equipe</h2>
-        <p class="lead reveal">Conheça os profissionais responsáveis por conduzir as demandas com técnica, ética e foco em resultados.</p>
+        <!-- ALTERAÇÃO: Substituí a classe 'reveal' pela nova classe 'reveal-item' -->
+        <h2 class="section-title reveal-item">Nossa equipe</h2>
+        <p class="lead reveal-item">Conheça os profissionais responsáveis por conduzir as demandas com técnica, ética e foco em resultados.</p>
         <div class="spacer-md"></div>
         <div class="team-grid">
-          <article class="lawyer reveal">
+          <!-- INCLUSÃO: Efeito reveal nos cards dos advogados -->
+          <article class="lawyer reveal-item">
             <img class="photo" src="imgs/adv-silverio.jpeg" alt="Foto do advogado Silvério Baldissera" loading="lazy" />
             <div class="body">
               <div class="name">SILVÉRIO BALDISSERA</div>
@@ -68,7 +71,7 @@ Atuando como advogado por (30) trinta anos nas esferas do processo judicial e ad
 Ao longo dos trinta anos dedicou-se também ao trabalho institucional como Tesoureiro da OAB Subseção de Joaçaba no período de 2010 a 2012, foi Vice-Presidente da OAB Subseção de Joaçaba/SC no período de 2013 a 2015 e Membro do Tribunal de Ética e Disciplina da OAB Seção de Santa Catarina no triênio 2016/2018.</p>
             </div>
           </article>
-          <article class="lawyer reveal">
+          <article class="lawyer reveal-item">
             <img class="photo pos-leandra" src="imgs/adv-leandra.jpeg" alt="Foto da advogada Leandra Bogoni" loading="lazy" />
             <div class="body">
               <div class="name">LEANDRA BOGONI</div>
@@ -76,7 +79,7 @@ Ao longo dos trinta anos dedicou-se também ao trabalho institucional como Tesou
               <p>Advogada, Bacharel em Direito (UNOESC/2001) e Pós-Graduanda em Direito de Família e Sucessões. Com mais de 24 anos de experiência, atua com ênfase em Família, Sucessões e Direito Civil.</p>
             </div>
           </article>
-          <article class="lawyer reveal">
+          <article class="lawyer reveal-item">
             <img class="photo" src="imgs/adv-vicenzo.jpeg" alt="Foto do advogado Vicenzo Baldissera" loading="lazy" />
             <div class="body">
               <div class="name">VICENZO BALDISSERA</div>
@@ -84,7 +87,7 @@ Ao longo dos trinta anos dedicou-se também ao trabalho institucional como Tesou
               <p>Advogado, Bacharel em Direito (UNOESC) e Pós-Graduando em Direito Securitário: Prática em Seguros e Resseguros. Atuação em Direito Civil, com foco em Direito Securitário e Responsabilidade Civil.</p>
             </div>
           </article>
-          <article class="lawyer reveal">
+          <article class="lawyer reveal-item">
             <img class="photo pos-fausto" src="imgs/adv-fausto.jpeg" alt="Foto do advogado Fausto Ouriques" loading="lazy" />
             <div class="body">
               <div class="name">FAUSTO OURIQUES</div>
@@ -100,120 +103,121 @@ Atuando como advogado há mais de 13 anos, possui sólida experiência nas área
 
 <section id="areas" class="section-bg-alt">
   <div class="container">
-      <h2 class="section-title">Áreas de atuação</h2>
-      <p class="lead" style="text-align: center; margin: 0 auto 2rem auto;">
+      <h2 class="section-title reveal-item">Áreas de atuação</h2>
+      <p class="lead reveal-item" style="text-align: center; margin: 0 auto 2rem auto;">
           SILVÉRIO BALDISSERA ADVOGADOS é um escritório multidisciplinar. Clique em uma área para saber mais.
       </p>
 
       <div class="areas-interactive-grid">
-          <div class="area-item" 
+          <!-- INCLUSÃO: Efeito reveal nos cards de áreas de atuação -->
+          <div class="area-item reveal-item" 
                data-title="Direito Civil" 
                data-description="É o principal ramo do direito privado, que trata do conjunto de normas reguladoras dos direitos e obrigações de ordem privada concernentes às pessoas, aos seus bens e às suas relações." 
                data-examples="Atuação em: indenizações por danos morais e materiais, responsabilidade civil, direito de vizinhança, posse e propriedade.">
               Direito Civil
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Securitário" 
                data-description="Regula as relações entre seguradoras, corretores e consumidores, tratando de questões relacionadas a contratos de seguro." 
                data-examples="Atuação em: negativa de cobertura de seguro de vida, automóvel, residencial ou saúde; atraso no pagamento de indenização; cláusulas abusivas em apólices; cancelamento indevido de contrato de seguro.">
               Direito Securitário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito de Família e Sucessões" 
                data-description="Trata das relações familiares e da partilha de bens após a morte, regulando aspectos como casamentos, divórcios, guarda de filhos e heranças." 
                data-examples="Atuação em: divórcio, guarda de filhos, pensão alimentícia, inventário, testamento.">
               Direito de Família e Sucessões
           </div>
 
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Médico e da Saúde" 
                data-description="Defende os direitos de pacientes e profissionais da saúde, abrangendo responsabilidades médicas, acesso a tratamentos e questões de planos de saúde." 
                data-examples="Atuação em: erro médico, negativa de plano de saúde, cirurgias urgentes não autorizadas, responsabilidade hospitalar.">
               Direito Médico e da Saúde
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Tributário" 
                data-description="Regula a arrecadação de tributos e a relação entre Fisco e contribuinte, buscando a justa aplicação das leis fiscais." 
                data-examples="Atuação em: contestação de impostos indevidos, recuperação de créditos tributários, planejamento tributário.">
               Direito Tributário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito do Trabalho" 
                data-description="Disciplina as relações entre empregados e empregadores, garantindo direitos e deveres de ambas as partes." 
                data-examples="Atuação em: verbas rescisórias, horas extras, vínculo empregatício, assédio moral no trabalho, defesa de empregadores e empregados.">
               Direito do Trabalho (Empregador e Empregado)
           </div>
           
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Contratual" 
                data-description="Especializado na elaboração, revisão e interpretação de contratos, assegurando a validade e o cumprimento das cláusulas." 
                data-examples="Atuação em: contratos de prestação de serviços, contratos de compra e venda, distratos, análise de cláusulas abusivas.">
               Direito Contratual
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Societário" 
                data-description="Regula a constituição, organização e funcionamento das sociedades empresariais, incluindo fusões, aquisições e dissoluções." 
                data-examples="Atuação em: abertura e encerramento de empresas, elaboração e alteração de contratos sociais, acordos entre sócios, resolução de conflitos societários, exclusão de sócio, reorganizações societárias (cisão, fusão e incorporação).">
               Direito Societário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Empresarial" 
                data-description="Abrange as normas que regulam a atividade das empresas, desde sua criação até a proteção de seus interesses comerciais." 
                data-examples="Atuação em: contratos comerciais, recuperação judicial, falência, responsabilidade de sócios, registro de marcas.">
               Direito Empresarial
           </div>
           
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Previdenciário" 
                data-description="Voltado à proteção social do trabalhador e de seus dependentes, assegurando o acesso a benefícios da Previdência Social." 
                data-examples="Atuação em: aposentadoria por idade ou invalidez, pensão por morte, auxílio-doença, benefício de prestação continuada (BPC/LOAS).">
               Direito Previdenciário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Imobiliário" 
                data-description="Envolve as relações jurídicas relativas a bens imóveis, como compra, venda, aluguel, regularização e disputas de propriedade." 
                data-examples="Atuação em: compra e venda de imóveis, usucapião, despejo, locação, regularização de imóveis.">
               Direito Imobiliário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Digital e Proteção de Dados" 
                data-description="Lida com as questões legais do mundo digital e a privacidade de dados pessoais, como a LGPD e crimes cibernéticos." 
                data-examples="Atuação em: LGPD, uso indevido de dados, responsabilidade por publicações na internet, crimes virtuais.">
               Direito Digital e Proteção de Dados
           </div>
           
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Ambiental" 
                data-description="Protege o meio ambiente e regula o uso sustentável dos recursos naturais, combatendo danos e promovendo a sustentabilidade." 
                data-examples="Atuação em: licenciamento ambiental, ações por danos ambientais, loteamentos irregulares, áreas de preservação.">
               Direito Ambiental
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Administrativo" 
                data-description="Trata da atuação do Estado e sua relação com os cidadãos, envolvendo licitações, concursos públicos e responsabilidade estatal." 
                data-examples="Atuação em: concursos públicos, licitações, responsabilização do Estado por danos, processos administrativos disciplinares.">
               Direito Administrativo
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Penal" 
                data-description="Regula os crimes e as penas impostas aos infratores, garantindo a defesa e o devido processo legal." 
                data-examples="Atuação em: defesa em processos criminais, crimes contra o patrimônio, crimes contra a honra, medidas cautelares.">
               Direito Penal
           </div>
           
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Agrário" 
                data-description="Regula as relações jurídicas relativas à atividade rural e à propriedade da terra, incluindo questões de uso e posse da terra." 
                data-examples="Atuação em: arrendamento rural, usucapião rural, regularização fundiária, questões com o INCRA.">
               Direito Agrário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito Bancário" 
                data-description="Trata da relação entre clientes e instituições financeiras, buscando a revisão de contratos e a defesa contra abusos." 
                data-examples="Atuação em: revisão de contratos de financiamento, cobranças indevidas, negativação irregular, cartão de crédito com juros abusivos.">
               Direito Bancário
           </div>
-          <div class="area-item" 
+          <div class="area-item reveal-item" 
                data-title="Direito do Consumidor" 
                data-description="Defende os direitos dos consumidores em suas relações com fornecedores, protegendo-os contra práticas abusivas e produtos defeituosos." 
                data-examples="Atuação em: cobrança indevida, propaganda enganosa, vício em produto ou serviço, negativação indevida.">
@@ -224,27 +228,20 @@ Atuando como advogado há mais de 13 anos, possui sólida experiência nas área
 </section>
   </main>
 
-  <footer class="footer">
-    <footer id="contato" class="footer"></footer>
-  <div class="container footer-content">
+  <footer class="footer" id="contato"> <div class="container footer-content">
     
-    <div class="footer-brand">
-      <div class="footer-logo"></div>
-    </div>
-
-    <div class="footer-column">
+    <!-- INCLUSÃO: Efeito reveal nas colunas do rodapé -->
+    <div class="footer-column reveal-item">
       <h3 class="footer-title">Endereço:</h3>
       <a href="https://maps.app.goo.gl/pYkyvobEfiH7cmk28" target="_blank" rel="noopener">
-        Av. Barão do Rio Branco, 694 - Térreo<br>
-        Centro, Joaçaba - SC, 89600-000
+        Av. Barão do Rio Branco, 694 - Térreo | Centro, Joaçaba - SC, 89600-000
       </a>
     </div>
 
-    <div class="footer-column">
+    <div class="footer-column reveal-item">
       <h3 class="footer-title">Horário de atendimento:</h3>
       <p>
-        Segunda a Sexta, das 8:30 às 11:30<br>
-        e das 13:30 às 17:30
+        Segunda a Sexta, das 8:30 às 11:30 e das 13:30 às 17:30
       </p>
     </div>
 
