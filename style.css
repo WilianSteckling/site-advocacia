@@ -187,8 +187,35 @@ section {
  padding-right: clamp(1rem, 4vw, 2rem); 
 }
 
+/*
 #sobre {
- background: linear-gradient( 45deg, #F7F3EF 0%, #C9A989 100% );
+ background: linear-gradient( 45deg, #C9A989 0%, #DAD3C3 100% );
+} */
+
+#sobre .section-title,
+#equipe .section-title,
+#areas .section-title,
+.footer-column .footer-title {
+    /* 1. Define o fundo como um degradê linear, de Marrom Claro para Bege */
+    background: linear-gradient(
+        90deg, 
+        #C9A989 25%, /* Marrom Claro (Primária) */
+        #DAD3C3 100% /* Bege (Secundária) */
+    );
+    
+    /* 2. Propriedades essenciais para que o degradê preencha APENAS o texto */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* 3. Torna a cor do texto transparente para que o degradê apareça */
+    color: transparent;
+    
+    /* 4. Garante que o texto tenha display inline-block ou block para o degradê funcionar */
+    display: inline-block;
+    
+    /* 5. Efeito de "contorno" suave (glow/halo) usando text-shadow centralizado */
+    /* Usa a cor #013A3F com 60% de opacidade e 6px de blur para um halo suave */
+    text-shadow: 0 0 6px rgba(1, 58, 63, 0.25); 
 }
 
 .section-bg-alt { background-color: var(--brand-light); }
@@ -498,6 +525,11 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
     }
 }
 @media (max-width: 600px) {
+  .hero-tagline {
+        font-size: 24px;
+        /* NOVO: Reposiciona ligeiramente para baixo para melhor alinhamento visual */
+        margin-top: 15vh; /* Ajuste o valor (em vh ou rem) conforme o ideal para o visual */
+    }
   .areas-interactive-grid {
     grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
   }
@@ -529,32 +561,69 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         width: 120px;
         height: 50px;
     }
+    
+}
 
-    .about,
-    .team-grid,
-    .areas-interactive-grid,
-    .footer-content {
-        grid-template-columns: 1fr 1fr;
+@media (min-width: 601px) and (max-width: 991px) {
+    .team-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colunas para tablets */
     }
 }
 
-@media (max-width: 600px) {
-   .hero {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* cobre toda a altura da tela */
-  background-image: var(--hero-bg-image-mobile); /* substitua pelo caminho da sua imagem */
-  background-size: cover; /* cobre toda a área sem distorcer */
-  background-position: center; /* centraliza a imagem */
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
-  padding-bottom: 50px;
+
+
+/* ======================================================= */
+/* ==== Media Queries para Responsividade (Mobile) ==== */
+/* ======================================================= */
+
+@media (max-width: 900px) {
+    .header .menu,
+    .header .brand-name {
+        display: none;
+    }
+    
+    .nav {
+        justify-content: space-between;
+    }
+    .header .brand {
+        flex-grow: 1;
+    }
+    .header .brand-logo {
+        width: 120px;
+        height: 50px;
+    }
+    
+    /* A LINHA ABAIXO FOI REMOVIDA PARA CORRIGIR O CORTE EM TELAS MÉDIAS: */
+    /* .about, .team-grid, .areas-interactive-grid, .footer-content {
+        grid-template-columns: 1fr 1fr;
+    } */
 }
+
+/* NOVO: Ajusta o grid da equipe para 2 colunas APENAS SE A TELA FOR MAIOR que 600px E menor que 992px */
+@media (min-width: 601px) and (max-width: 991px) {
+    .team-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colunas para tablets */
+    }
+}
+
+
+@media (max-width: 600px) {
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* cobre toda a altura da tela */
+        background-image: var(--hero-bg-image-mobile); /* substitua pelo caminho da sua imagem */
+        background-size: cover; /* cobre toda a área sem distorcer */
+        background-position: center; /* centraliza a imagem */
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        padding-bottom: 50px;
+    }
 
 
     .hero-content {
@@ -567,11 +636,16 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
 
     .hero-tagline {
         font-size: 24px;
+        /* NOVO: Reposiciona ligeiramente para baixo para melhor alinhamento visual */
+        margin-top: 15vh;
     }
 
     section {
-        padding: 2rem 0;
-    }
+     padding-top: 2rem;
+     padding-bottom: 2rem;
+     padding-left: clamp(1rem, 4vw, 2rem); 
+    padding-right: clamp(1rem, 4vw, 2rem); 
+  }
 
     .about,
     .team-grid,
