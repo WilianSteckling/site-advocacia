@@ -53,7 +53,7 @@ p {
     z-index: 1000;
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding: .4rem 0;
+    padding: 0.4rem 0;
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
@@ -501,20 +501,21 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
     grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
   }
   .footer-content {
-    flex-direction: column; /* Empilha as colunas verticalmente */
+    flex-direction: column;  
     justify-content: center;
     align-items: center;
     gap: 2.5rem; /* Espaçamento entre colunas empilhadas */
    }
 
   .footer-columns-wrapper {
-     grid-template-columns: 1fr; /* CORREÇÃO: Endereço e Horário ficam EMPILHADOS */
+     grid-template-columns: 1fr; 
      gap: 1.5rem;
-    }
+    } 
     
     .footer-brand,
     .footer-column { 
-       max-width: 100%; /* Ocupa toda a largura disponível */
+       max-width: 90%; /* Ocupa toda a largura disponível */
+       width: 100%;
     }
     .footer-column p,
     .footer-column a,
@@ -538,6 +539,14 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   .modal-title {
     font-size: 1.5rem;
   }
+   .footer-column a,
+    .footer-column p {
+        font-size: 1.1em;
+    }
+     .footer-column {
+        max-width: 100%; 
+        width: 100%;
+    }
 }
 /* ======================================================= */
 /* ==== Media Queries para Responsividade (Mobile) ==== */
@@ -591,10 +600,6 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         height: 50px;
     }
     
-    /* A LINHA ABAIXO FOI REMOVIDA PARA CORRIGIR O CORTE EM TELAS MÉDIAS: */
-    /* .about, .team-grid, .areas-interactive-grid, .footer-content {
-        grid-template-columns: 1fr 1fr;
-    } */
 }
 
 /* NOVO: Ajusta o grid da equipe para 2 colunas APENAS SE A TELA FOR MAIOR que 600px E menor que 992px */
