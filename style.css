@@ -198,9 +198,9 @@ section {
 .footer-column .footer-title {
     /* 1. Define o fundo como um degradê linear, de Marrom Claro para Bege */
     background: linear-gradient(
-        90deg, 
-        #C9A989 25%, /* Marrom Claro (Primária) */
-        #DAD3C3 100% /* Bege (Secundária) */
+        0deg, 
+        #C9A989 100%, /* Marrom Claro (Primária) */
+        #DAD3C3 0% /* Bege (Secundária) */
     );
     
     /* 2. Propriedades essenciais para que o degradê preencha APENAS o texto */
@@ -213,9 +213,7 @@ section {
     /* 4. Garante que o texto tenha display inline-block ou block para o degradê funcionar */
     display: inline-block;
     
-    /* 5. Efeito de "contorno" suave (glow/halo) usando text-shadow centralizado */
-    /* Usa a cor #013A3F com 60% de opacidade e 6px de blur para um halo suave */
-    text-shadow: 0 0 6px rgba(1, 58, 63, 0.25); 
+    
 }
 
 .section-bg-alt { background-color: var(--brand-light); }
@@ -746,7 +744,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   }
 
   #equipe .lawyer .body {
-    padding: 1.5rem; /* Garante um bom espaçamento interno */
+    padding: 1.5rem; 
   }
 
   #equipe .lawyer p {
