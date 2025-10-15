@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'Falheiz Regular'; /* Nome que você usará no CSS */
+    src: url('fonts/Falheiz-Regular.woff2') format('woff2'), /* Caminho otimizado WOFF2 */
+         url('fonts/Falheiz-Regular.woff') format('woff');   /* Caminho WOFF para compatibilidade */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Otimiza o carregamento: usa fonte de fallback e carrega Falheiz depois */
+}
+
+@font-face {
+    font-family: 'Aboreto Regular'; 
+    src: url('fonts/Aboreto-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; 
+}
+
 :root {
     --brand-dark: #033b40; /* verde petróleo */
     --brand-sand: #caaa8a; /* bege areia (usada para destaque) */
@@ -9,9 +26,10 @@
     --hero-bg-image: url('imgs/hero-mobile.jpeg');     /* Foto da equipe para o fundo */
     --hero-bg-image-mobile: url('imgs/hero-desk.jpeg'); /* Imagem para celular */
     --logo-menu-src: url('imgs/logo-cabecalho.png');
-    /* VARIÁVEIS DE FONTE */
+    --font-aboreto: 'Aboreto', 'Libre Baskerville', serif; 
     --logo-rodape-src: url('imgs/logo-rodapé.png'); 
     --font-title: 'Libre Baskerville', serif;
+    --font-falheiz: 'Falheiz Regular', 'Libre Baskerville', serif; /* Usa Falheiz, com Libre Baskerville como fallback */
     --font-body: 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -19,7 +37,7 @@
 * { box-sizing: border-box; }
 html, body {
     margin:0; padding:0;
-    font-family: var(--font-body);
+    font-family: var(--font-aboreto);
     color: var(--text);
     background: var(--bg);
     scroll-behavior: smooth;
@@ -94,6 +112,7 @@ p {
     display: flex;
     align-items: center; 
     justify-content: space-between;
+    padding: 0 2rem;
 }
 .header .brand {
     display:flex;
@@ -112,7 +131,7 @@ p {
     transition: width 0.3s ease, height 0.3s ease;
 }
 .header .brand-name {
-    font-family: var(--font-title);
+    font-family: var(--font-falheiz);
     font-size: 1rem;
 }
 .menu {
@@ -120,7 +139,7 @@ p {
     gap: 2rem;
 }
 .menu a {
-    font-family: var(--font-body);
+    font-family: var(--font-aboreto);
     color: #fff;
     opacity: 0.8;
     font-weight: 500;
@@ -153,7 +172,7 @@ p {
     background-image: var(--hero-bg-image);
     background-size: cover;
     background-position: center;
-    padding-bottom: 10vh; 
+    padding-bottom: 1vh; 
 }
 
 .hero-content {
@@ -169,13 +188,53 @@ p {
     height: auto;
     filter: brightness(0) invert(1);
 }
+
+
 .hero-tagline {
-    font-family: var(--font-title);
-    font-size: 28px; 
+    font-family: var(--font-falheiz);
+    font-size: 52px; 
     font-weight: 400;
     line-height: 1.2;
     text-align: center;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    
+    transform: translateY(43px); 
+
+    /* 1. CONFIGURAÇÃO DO GRADIENTE COMBINADO: Base Fixa + Feixe de Luz Móvel */
+    /* Cria o degradê Marrom Claro -> Bege no início (0% a 50%).
+       E cria o feixe de luz (branco) no meio (45% a 55%), que será a parte animada. */
+    background: linear-gradient(
+        90deg, 
+        /* 1. Degradê de Base Fixo (Marrom Claro para Bege) */
+        #C9A989 0%,       
+        #DAD3C3 30%,       
+        /* 2. Feixe de Luz Transparente/Branco no meio do gradiente longo */
+        rgba(255, 255, 255, 0) 45%, /* Transparente antes do feixe */
+        #ffffff 50%,               /* O próprio Feixe de Luz (Branco) */
+        rgba(255, 255, 255, 0) 55%, /* Transparente após o feixe */
+        /* 3. Continuar o degradê de Base */
+        #DAD3C3 80%, 
+        #C9A989 100%
+    );
+    
+    /* Tamanho do fundo muito maior que a área do texto para permitir o movimento do feixe. */
+    background-size: 800% 100%; 
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block; 
+    
+    /* ANIMAÇÃO DO BRILHO (feixe de luz da esquerda p/ direita) */
+    animation: stunningShimmer 25s linear infinite; /* Usando 8s linear para movimento suave e contínuo */
+    
+}
+
+/* DEFINIÇÃO DA ANIMAÇÃO (Mantida, pois ela é que faz o movimento horizontal) */
+@keyframes stunningShimmer {
+    /* Começa com o feixe de luz fora da tela, à esquerda */
+    0% { background-position: -200% center; } 
+    /* Termina com o feixe de luz fora da tela, à direita */
+    100% { background-position: 200% center; }
 }
 
 /* ================= Sections ================= */
@@ -217,8 +276,8 @@ section {
 }
 
 .section-bg-alt { background-color: var(--brand-light); }
-h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer, .area-card h3 {
-    font-family: var(--font-title);
+h1, h2, h3, h4, h5, h6, .section-title, .name, .brand-name-footer, .area-card h3 {
+    font-family: var(--font-falheiz);
 }
 .section-title { 
     font-size: clamp(1.6rem, 2.6vw, 2.1rem); 
@@ -234,6 +293,11 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
  align-items: center;
 }
 /* Áreas de Atuação */
+.lead {
+    text-align: left !important; /* Força alinhamento à esquerda */
+    max-width: 100%; /* Garante que ocupe toda a largura disponível */
+    margin: 0 0 2rem 0; /* Ajusta a margem (2rem de margem inferior, 0 nas laterais) */
+}
 .areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
 .area-card { border:1px solid rgba(3,59,64,.14); border-radius: .9rem; padding:1rem; transition: box-shadow .2s ease, transform .2s ease; cursor: pointer; }
 .area-card:hover { box-shadow: 0 10px 22px rgba(3,59,64,.12); transform: translateY(-2px); }
@@ -476,7 +540,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   opacity: 1;
 }
 .modal-title {
-  font-family: var(--font-title); /* Usa a fonte de título para o modal */
+  font-family: var(--font-falheiz); /* Usa a fonte de título para o modal */
   font-size: 1.8rem; /* Título maior */
   margin: 0 0 0.8rem;
   color: #fff; /* Garante que o título seja branco */
@@ -527,7 +591,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
   .hero-tagline {
         font-size: 24px;
         /* NOVO: Reposiciona ligeiramente para baixo para melhor alinhamento visual */
-        margin-top: 15vh; /* Ajuste o valor (em vh ou rem) conforme o ideal para o visual */
+        margin-top: 20vh; /* Ajuste o valor (em vh ou rem) conforme o ideal para o visual */
     }
   .areas-interactive-grid {
     grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
@@ -548,35 +612,6 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         width: 100%;
     }
 }
-/* ======================================================= */
-/* ==== Media Queries para Responsividade (Mobile) ==== */
-/* ======================================================= */
-
-@media (max-width: 900px) {
-    .header .menu,
-    .header .brand-name {
-        display: none;
-    }
-    
-    .nav {
-        justify-content: space-between;
-    }
-    .header .brand {
-        flex-grow: 1;
-    }
-    .header .brand-logo {
-        width: 120px;
-        height: 50px;
-    }
-    
-}
-
-@media (min-width: 601px) and (max-width: 991px) {
-    .team-grid {
-        grid-template-columns: 1fr 1fr; /* 2 colunas para tablets */
-    }
-}
-
 
 
 /* ======================================================= */
@@ -615,7 +650,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
         position: relative;
         width: 100%;
         height: 100vh; /* cobre toda a altura da tela */
-        background-image: var(--hero-bg-image-mobile); /* substitua pelo caminho da sua imagem */
+        background-image: var(--hero-bg-image-mobile);
         background-size: cover; /* cobre toda a área sem distorcer */
         background-position: center; /* centraliza a imagem */
         background-repeat: no-repeat;
@@ -638,9 +673,9 @@ h1, h2, h3, h4, h5, h6, .section-title, .name, .footer-title, .brand-name-footer
     }
 
     .hero-tagline {
-        font-size: 24px;
+        font-size: 34px;
         /* NOVO: Reposiciona ligeiramente para baixo para melhor alinhamento visual */
-        margin-top: 15vh;
+        margin-top: 25vh;
     }
 
     section {
