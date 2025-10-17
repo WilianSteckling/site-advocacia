@@ -196,45 +196,8 @@ p {
     font-weight: 400;
     line-height: 1.2;
     text-align: center;
-    
-    transform: translateY(43px); 
-
-    /* 1. CONFIGURAÇÃO DO GRADIENTE COMBINADO: Base Fixa + Feixe de Luz Móvel */
-    /* Cria o degradê Marrom Claro -> Bege no início (0% a 50%).
-       E cria o feixe de luz (branco) no meio (45% a 55%), que será a parte animada. */
-    background: linear-gradient(
-        90deg, 
-        /* 1. Degradê de Base Fixo (Marrom Claro para Bege) */
-        #C9A989 0%,       
-        #DAD3C3 30%,       
-        /* 2. Feixe de Luz Transparente/Branco no meio do gradiente longo */
-        rgba(255, 255, 255, 0) 45%, /* Transparente antes do feixe */
-        #ffffff 50%,               /* O próprio Feixe de Luz (Branco) */
-        rgba(255, 255, 255, 0) 55%, /* Transparente após o feixe */
-        /* 3. Continuar o degradê de Base */
-        #DAD3C3 80%, 
-        #C9A989 100%
-    );
-    
-    /* Tamanho do fundo muito maior que a área do texto para permitir o movimento do feixe. */
-    background-size: 800% 100%; 
-    
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    display: inline-block; 
-    
-    /* ANIMAÇÃO DO BRILHO (feixe de luz da esquerda p/ direita) */
-    animation: stunningShimmer 25s linear infinite; /* Usando 8s linear para movimento suave e contínuo */
-    
-}
-
-/* DEFINIÇÃO DA ANIMAÇÃO (Mantida, pois ela é que faz o movimento horizontal) */
-@keyframes stunningShimmer {
-    /* Começa com o feixe de luz fora da tela, à esquerda */
-    0% { background-position: -200% center; } 
-    /* Termina com o feixe de luz fora da tela, à direita */
-    100% { background-position: 200% center; }
+    transform: translateY(43px);
+    color: #fff;
 }
 
 /* ================= Sections ================= */
