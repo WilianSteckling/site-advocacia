@@ -24,7 +24,7 @@
     --bg: #ffffff;
     --logo-header-src: url('imgs/logo-icon.png'); /* Caminho da logo pequena para o cabeçalho */
     --hero-bg-image: url('imgs/hero-mobile.jpeg');     /* Foto da equipe para o fundo */
-    --hero-bg-image-mobile: url('imgs/hero-desk.jpeg'); /* Imagem para celular */
+    --hero-bg-image-mobile: url('imgs/hero-mobile-sb.png'); /* Imagem para celular */
     --logo-menu-src: url('imgs/logo-cabecalho.png');
     --font-aboreto: 'Aboreto', 'Libre Baskerville', serif; 
     --logo-rodape-src: url('imgs/logo-rodapé.png'); 
@@ -197,7 +197,7 @@ p {
     line-height: 1.2;
     text-align: center;
     transform: translateY(43px);
-    color: #fff;
+    color: #C9A989;
 }
 
 /* ================= Sections ================= */
