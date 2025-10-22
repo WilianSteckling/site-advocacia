@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Falheiz Regular'; /* Nome que você usará no CSS */
-    src: url('fonts/Falheiz-Regular.woff2') format('woff2'), /* Caminho otimizado WOFF2 */
-         url('fonts/Falheiz-Regular.woff') format('woff');   /* Caminho WOFF para compatibilidade */
+    src: url('fonts/falheizregular-pkn8z.otf') format('opentype'), /* Formato OpenType */
+         url('fonts/falheizregular-l3pne.ttf') format('truetype'); /* Formato TrueType como fallback */
     font-weight: normal;
     font-style: normal;
     font-display: swap; /* Otimiza o carregamento: usa fonte de fallback e carrega Falheiz depois */
