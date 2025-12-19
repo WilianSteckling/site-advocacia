@@ -1,0 +1,797 @@
+@font-face {
+    font-family: 'Falheiz Regular'; /* Nome que você usará no CSS */
+    src: url('fonts/falheizregular-pkn8z.otf') format('opentype'), /* Formato OpenType */
+         url('fonts/falheizregular-l3pne.ttf') format('truetype'); /* Formato TrueType como fallback */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Otimiza o carregamento: usa fonte de fallback e carrega Falheiz depois */
+}
+
+@font-face {
+    font-family: 'Aboreto Regular'; 
+    src: url('fonts/Aboreto-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; 
+}
+
+:root {
+    --brand-dark: #033b40; /* verde petróleo */
+    --brand-sand: #caaa8a; /* bege areia (usada para destaque) */
+    --brand-light: #f8fafc; /* quase branco, para fundos suaves */
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #ffffff;
+    --logo-header-src: url('imgs/logo-icon.png'); /* Caminho da logo pequena para o cabeçalho */
+    --hero-bg-image: url('imgs/hero-mobile.png');     /* Foto da equipe para o fundo */
+    --hero-bg-image-mobile: url('imgs/hero-celular.png'); /* Imagem para celular */
+    --logo-menu-src: url('imgs/logo-cabecalho.png');
+    --font-aboreto: 'Aboreto', 'Libre Baskerville', serif; 
+    --logo-rodape-src: url('imgs/logo-rodapé.png'); 
+    --font-title: 'Libre Baskerville', serif;
+    --font-falheiz: 'Falheiz Regular', 'Libre Baskerville', serif; /* Usa Falheiz, com Libre Baskerville como fallback */
+    --font-body: 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Base styles */
+* { box-sizing: border-box; }
+html, body {
+    margin:0; padding:0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    scroll-behavior: smooth;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; border: 0; }
+
+/* ADICIONE ESTA NOVA REGRA */
+p {
+  text-align: justify;
+  hyphens: auto; /* Opcional: Ajuda a evitar grandes espaços entre as palavras */
+  font-size: 1.14rem; /* Ajuste o valor conforme sua preferência, 1rem é o padrão */
+  line-height: 1.7;
+  text-indent: 0;
+  margin-bottom: 1.5rem;
+}
+
+.container { 
+ max-width: 1200px; 
+ margin: 0 auto; 
+ width: 100%;
+}
+
+
+/* ================= Header (CORRIGIDO PARA FICAR FIXO) ================= */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.header .brand-name,
+.header .menu a {
+    color: #fff;
+}
+.header .brand-logo {
+    filter: brightness(0) invert(1);
+}
+
+.header.scrolled {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.header.scrolled .brand-name,
+.header.scrolled .menu a {
+    color: var(--muted);
+}
+.header.scrolled .menu a:hover {
+    color: var(--brand-dark);
+    background: rgba(3,59,64,.075);
+}
+.header.scrolled .brand-logo {
+    filter: none;
+}
+.header.scrolled .contact-button {
+    border-color: transparent;
+}
+
+.header .brand-name, .header .menu a, .header .brand-logo {
+    transition: color 0.3s ease, filter 0.3s ease;
+}
+.nav {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+.header .brand {
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+    color: #fff;
+    font-weight: 500;
+}
+.header .brand-logo {
+    width: 200px; /* AGORA, ESTA LINHA CONTROLA O TAMANHO REAL */
+    height: 80px; /* Mantemos uma altura para o cabeçalho */
+    background-size: 100% auto; 
+    background-image: var(--logo-menu-src);
+    background-repeat: no-repeat;
+    background-position: left center; /* Alinha a imagem à esquerda */
+    transition: width 0.3s ease, height 0.3s ease;
+}
+.header .brand-name {
+    font-family: var(--font-title);
+    font-size: 1rem;
+}
+.menu {
+    display:flex;
+    gap: 2rem;
+}
+.menu a {
+    font-family: var(--font-body);
+    color: #fff;
+    opacity: 0.8;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+.menu a:hover {
+    opacity: 1;
+}
+.header .contact-button {
+    background: var(--brand-dark);
+    color: #fff;
+    padding: .8rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* ================= Hero (VERSÃO FINAL E CORRIGIDA) ================= */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end; 
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    background-image: var(--hero-bg-image);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 1vh; 
+}
+
+.hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%; 
+}
+.hero-logo-img {
+    width: 280px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+
+.hero-tagline {
+    font-family: var(--font-title);
+    font-size: 52px; 
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    transform: translateY(43px);
+    color: #C9A989;
+}
+
+/* ================= Sections ================= */
+section { 
+ padding-top: clamp(2.5rem, 6vw, 4.25rem);
+ padding-bottom: clamp(2.5rem, 6vw, 4.25rem);
+ /* O padding horizontal garantirá o respiro nas laterais em telas pequenas */
+ padding-left: clamp(1rem, 4vw, 2rem); 
+ padding-right: clamp(1rem, 4vw, 2rem); 
+}
+
+/*
+#sobre {
+ background: linear-gradient( 45deg, #C9A989 0%, #DAD3C3 100% );
+} */
+
+#sobre .section-title,
+#equipe .section-title,
+#areas .section-title,
+.footer-column .footer-title {
+    /* 1. Define o fundo como um degradê linear, de Marrom Claro para Bege */
+    background: linear-gradient(
+        0deg, 
+        #C9A989 100%, /* Marrom Claro (Primária) */
+        #DAD3C3 0% /* Bege (Secundária) */
+    );
+    
+    /* 2. Propriedades essenciais para que o degradê preencha APENAS o texto */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* 3. Torna a cor do texto transparente para que o degradê apareça */
+    color: transparent;
+    
+    /* 4. Garante que o texto tenha display inline-block ou block para o degradê funcionar */
+    display: inline-block;
+    
+    
+}
+
+.section-bg-alt { background-color: var(--brand-light); }
+h1, h2, h3, h4, h5, h6, .section-title, .name, .brand-name-footer, .area-card h3 {
+    font-family: var(--font-title);
+}
+.section-title { 
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem); 
+    margin:0 0 1rem; 
+    color: var(--brand-dark); 
+}
+
+/* About */
+.about {
+ display: grid;
+ grid-template-columns: 1fr; /* Garante que sempre use 1 coluna */
+ gap: 2rem;
+ align-items: center;
+}
+/* Áreas de Atuação */
+.lead {
+    text-align: left !important; /* Força alinhamento à esquerda */
+    max-width: 100%; /* Garante que ocupe toda a largura disponível */
+    margin: 0 0 2rem 0; /* Ajusta a margem (2rem de margem inferior, 0 nas laterais) */
+}
+.areas-interactive-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
+.area-card { border:1px solid rgba(3,59,64,.14); border-radius: .9rem; padding:1rem; transition: box-shadow .2s ease, transform .2s ease; cursor: pointer; }
+.area-card:hover { box-shadow: 0 10px 22px rgba(3,59,64,.12); transform: translateY(-2px); }
+
+/* Equipe */
+.team-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; }
+.lawyer { border:1px solid rgba(3,59,64,.14); border-radius: 1rem; overflow:hidden; display:flex; flex-direction:column; background:#fff; }
+.lawyer .photo { aspect-ratio: 4/3; width:100%; object-fit: cover; object-position: center 20%; background:#eef3f3; }
+.lawyer .body { padding:1rem; display:flex; flex-direction:column; gap:.35rem; }
+.lawyer .name { font-weight: 700; color: var(--brand-dark); }
+.lawyer .oab { font-size:.92rem; color: var(--muted); }
+.lawyer .tags { display: none; }
+.lawyer .photo.pos-leandra { object-position: center 15%; }
+.lawyer .photo.pos-fausto { object-position: center 10%; }
+
+/* Contato */
+.contact { 
+    display:grid; 
+    grid-template-columns: 1fr; 
+    gap:2rem; 
+    align-items:start; 
+    justify-items: center; 
+}
+.contact .card { 
+    border:1px solid rgba(3,59,64,.14); 
+    border-radius: 1rem; 
+    padding:1.5rem; 
+    max-width: 600px; 
+    width: 100%; 
+}
+
+/* ================= Footer (NOVO LAYOUT) ================= */
+.footer {
+  background: #f7f7f7;
+  color: var(--muted);
+  padding: 1rem 0 0; 
+  font-size: 0.8rem; 
+  border-top: 1px solid #e0e0e0;
+}
+.footer-content {
+   display: flex; /* Usamos Flexbox, que é mais flexível para alinhamento em uma linha */
+   justify-content: space-around; /* Distribui as colunas horizontalmente com espaçamento uniforme */
+   align-items: center; /* ALINHA VERTICALMENTE AS COLUNAS NO CENTRO */
+   gap: 2rem; 
+   padding-top: 2.5rem; /* Aumentei um pouco o padding */  
+   padding-bottom: 2.5rem; 
+   max-width: 1200px; /* Usa a largura padrão do container */
+   margin: 0 auto;
+}
+
+.footer-brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.75rem; /* Ligeiramente reduzido */
+  flex-direction: column; /* Faz o texto ficar abaixo do logo no rodapé */
+  text-align: center; /* Centraliza o texto */
+}
+.footer-logo {
+  width: 70px; 
+  height: 70px; 
+  background-image: var(--logo-rodape-src);
+  background-size: contain; /* Ajusta para que o logo caiba sem cortar */
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+  margin-bottom: 0.5rem; /* Adiciona um pequeno espaço entre logo e texto */
+}
+.footer-column { 
+  display: flex; 
+  align-items: center; /* ALINHA VERTICALMENTE O CONTEÚDO DENTRO DA COLUNA */
+  gap: 0.5rem; 
+  flex-direction: column; 
+  text-align: center; /* Centraliza o texto */
+  flex-basis: 40%; /* Sugestão para dar espaço a cada coluna e quebrar em mobile */
+  flex-grow: 1; /* Permite que cresçam para preencher */
+  max-width: 45%; /* Limita para não ficarem muito grandes em telas largas */
+}
+
+.footer-column a,
+.footer-column p,
+.footer-title {
+ text-align: center; 
+ margin: 0;
+}
+
+/* AJUSTE PARA O PARÁGRAFO */
+.footer-column p { 
+ line-height: 1.4;
+ font-size: 1em; 
+ margin: 0; /* Garante que p não tenha margin-bottom padrão */
+}
+.footer-bottom { 
+  text-align: center; 
+  padding: 0.75rem 0; /* REDUZIDO: de 1rem para 0.75rem */
+  font-size: 0.75rem; /* UM POUCO MENOR: de 0.8rem para 0.75rem */
+  border-top: 1px solid #e0e0e0; 
+  margin-top: 0.3rem; 
+}
+
+/* NOVO: Estilo para a marca no rodapé */
+.footer-brand .brand-name-footer {
+  font-family: var(--font-title);
+  font-size: 1rem; /* Ajuste conforme necessário */
+  line-height: 1.3;
+  color: var(--brand-dark); /* Cor escura para a marca */
+}
+.footer-brand .oab-footer {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer-column a { text-decoration: underline; text-decoration-color: rgba(0,0,0,0.2); transition: color 0.2s ease; }
+.footer-column a:hover { color: var(--brand-dark); }
+.footer-bottom { text-align: center; padding: 1rem 0; font-size: 0.8rem; border-top: 1px solid #e0e0e0; margin-top: 2rem; }
+/* CORREÇÃO: Centraliza o texto de copyright no rodapé */
+.footer-bottom p {
+  text-align: center;
+  font-size: 1em; 
+}
+
+/* Animação de Flutuação (Float) */
+@keyframes floatAnimation {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Botão WhatsApp Flutuante */
+.whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1100;
+}
+.whatsapp a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Tamanho da área de clique */
+  height: 50px; /* Tamanho da área de clique */
+  background: transparent; /* Fundo removido */
+  /* As linhas de border-radius e box-shadow foram removidas */
+  animation: floatAnimation 2.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+.whatsapp a:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
+}
+.whatsapp a::before {
+  content: "";
+  width: 48px; /* Ícone maior */
+  height: 48px; /* Ícone maior */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%2325D366' d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 221.9-99.6 221.9-222 .1-59.3-25.1-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.2-27.9l-6.9-4.1-72.1 18.9L99 353.5l-4.5-7.3c-18.9-30.1-29.6-65.4-29.6-101.8 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22)); /* ADICIONADO: Sombra mais suave no próprio ícone */
+}
+
+/* ======================== */
+/* ÁREAS DE ATUAÇÃO (PARA MODAL) */
+/* ======================== */
+
+.areas-interactive-grid { 
+    display:grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap:1rem; 
+}
+.area-item { 
+    border:1px solid rgba(3,59,64,.14); /* Adicionei uma borda para visual */
+    border-radius: .9rem; 
+    padding:1.5rem; /* Ajuste o padding para o conteúdo caber */
+    transition: box-shadow .2s ease, transform .2s ease; 
+    cursor: pointer; 
+    background: #fff; /* Fundo branco para os cards */
+    display: flex; /* Para centralizar o texto dentro do card */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80px; /* Garante uma altura mínima para os cards */
+    font-weight: 600;
+    color: var(--brand-dark);
+    font-size: 1.1em;
+    animation: pulseEffect 2.5s infinite ease-in-out;
+}
+.area-item:hover { 
+    box-shadow: 0 10px 22px rgba(3,59,64,.12); 
+    transform: translateY(-2px); 
+}
+
+/* ======================== */
+/* ESTILOS DO MODAL */
+/* ======================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 59, 64, 0.7); /* Fundo semi-transparente */
+  backdrop-filter: blur(4px); /* Efeito de desfoque */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  background: var(--brand-dark); /* Fundo verde escuro, como na imagem 2 */
+  color: #fff; /* Texto branco */
+  padding: 2.5rem 2rem; /* Aumentei um pouco o padding para combinar com a imagem 2 */
+  border-radius: 1rem;
+  width: min(700px, 90%); /* Aumentei a largura máxima */
+  position: relative;
+  text-align: center;
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.3s ease;
+}
+.modal-overlay.visible .modal-content {
+  transform: scale(1) translateY(0);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.modal-close-btn:hover {
+  opacity: 1;
+}
+.modal-title {
+  font-family: var(--font-title); /* Usa a fonte de título para o modal */
+  font-size: 1.8rem; /* Título maior */
+  margin: 0 0 0.8rem;
+  color: #fff; /* Garante que o título seja branco */
+}
+.modal-text {
+  opacity: 0.9;
+  line-height: 1.6;
+  margin: 0 auto 1rem; /* Centraliza e ajusta margem */
+  max-width: 90%; /* Limita a largura do texto para melhor leitura */
+  color: #e0e0e0; /* Cor do texto um pouco mais suave */
+}
+.modal-text.examples {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 0.95rem;
+  color: #ccc; /* Cor um pouco mais clara para exemplos */
+}
+
+/* Media query para responsividade dos cards */
+@media (max-width: 900px) {
+  .areas-interactive-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+  }
+  .footer-content {
+    flex-direction: column;  
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem; /* Espaçamento entre colunas empilhadas */
+   }
+
+  .footer-columns-wrapper {
+     grid-template-columns: 1fr; 
+     gap: 1.5rem;
+    } 
+    
+    .footer-brand,
+    .footer-column { 
+       max-width: 90%; /* Ocupa toda a largura disponível */
+       width: 100%;
+    }
+    .footer-column p,
+    .footer-column a,
+    .footer-title {
+        text-align: center; 
+    }
+}
+@media (max-width: 600px) {
+  .hero-tagline {
+        font-size: 24px;
+        /* NOVO: Reposiciona ligeiramente para baixo para melhor alinhamento visual */
+        margin-top: 20vh; /* Ajuste o valor (em vh ou rem) conforme o ideal para o visual */
+    }
+  .areas-interactive-grid {
+    grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+  }
+  .modal-content {
+    padding: 2rem 1rem; /* Ajusta padding do modal em mobile */
+    width: 95%;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+  }
+   .footer-column a,
+    .footer-column p {
+        font-size: 1.1em;
+    }
+     .footer-column {
+        max-width: 100%; 
+        width: 100%;
+    }
+}
+
+
+/* ======================================================= */
+/* ==== Media Queries para Responsividade (Mobile) ==== */
+/* ======================================================= */
+
+@media (max-width: 900px) {
+    .header .menu,
+    .header .brand-name {
+        display: none;
+    }
+    
+    .nav {
+        justify-content: space-between;
+    }
+    .header .brand {
+        flex-grow: 1;
+    }
+    .header .brand-logo {
+        width: 120px;
+        height: 50px;
+    }
+    
+}
+
+/* NOVO: Ajusta o grid da equipe para 2 colunas APENAS SE A TELA FOR MAIOR que 600px E menor que 992px */
+@media (min-width: 601px) and (max-width: 991px) {
+    .team-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colunas para tablets */
+    }
+}
+
+
+@media (max-width: 600px) {
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* cobre toda a altura da tela */
+        background-image: var(--hero-bg-image-mobile);
+        background-size: cover; /* cobre toda a área sem distorcer */
+        background-position: center; /* centraliza a imagem */
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        padding-bottom: 50px;
+    }
+
+
+    .hero-content {
+        z-index: 1; /* Mantém o conteúdo na frente */
+    }
+
+    .hero-logo-img {
+        width: 220px;
+    }
+
+    .hero-tagline {
+        font-size: 34px;
+        /* NOVO: Reposiciona ligeiramente para baixo para melhor alinhamento visual */
+        margin-top: 25vh;
+    }
+
+    section {
+     padding-top: 2rem;
+     padding-bottom: 2rem;
+     padding-left: clamp(1rem, 4vw, 2rem); 
+    padding-right: clamp(1rem, 4vw, 2rem); 
+  }
+
+    .about,
+    .team-grid,
+    .areas-interactive-grid,
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .about .image {
+        margin-top: 1.5rem;
+    }
+
+    .footer-brand {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+}
+
+/* ===================== */
+/* AJUSTES SEÇÃO EQUIPE  */
+/* ===================== */
+
+#equipe .team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  justify-items: center;
+  width: 100%; 
+  margin: 0; 
+}
+
+/* Cada advogado (card) */
+#equipe .lawyer .photo {
+    width: 100%; /* Faz a imagem ocupar toda a largura do card */
+    max-width: none; /* Remove o limite de largura de 320px */
+    margin: 0; /* Remove as margens */
+    display: block;
+    border-radius: 0; /* O arredondamento já está no card pai (.lawyer) */
+}
+
+#equipe .lawyer:hover {
+  transform: translateY(0px);
+}
+
+#equipe .lawyer .photo {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #eee;
+}
+
+#equipe .lawyer .body {
+  padding: 1.5rem;
+  text-align: justify;
+}
+
+#equipe .lawyer .name {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #033b40;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+#equipe .lawyer .oab {
+  font-weight: 600;
+  color: #777;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#equipe .lawyer p {
+  line-height: 1.6;
+  color: #333;
+  font-size: 1.0rem;
+}
+
+/* ===================== */
+/* DESKTOP - GRID 2x2    */
+/* ===================== */
+@media (min-width: 992px) {
+  #equipe .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    row-gap: 4rem;
+    align-items: start;
+    width: 100%; 
+    margin: 0; 
+  }
+
+  /* ESTA É A REGRA CORRIGIDA PARA A IMAGEM */
+  #equipe .lawyer .photo {
+    width: 100%; /* Ocupa toda a largura do card */
+    max-width: none; /* Remove o limite máximo de largura */
+    margin: 0; /* Remove as margens */
+    display: block;
+    border-radius: 0; /* O arredondamento fica no card pai (.lawyer) */
+  }
+
+  #equipe .lawyer .body {
+    padding: 1.5rem; 
+  }
+
+  #equipe .lawyer p {
+    font-size: 1.14em;
+    line-height: 1.7;
+    text-indent: 1.5rem;
+  }
+}
+
+/* CORREÇÃO DE ANCORAGEM PARA CABEÇALHO FIXO */
+/* Aplica um espaçamento de 100px no topo ao rolar para uma âncora (ID de seção) */
+section[id] {
+    scroll-margin-top: 100px; 
+}
+/* Se houver outras divs importantes com ID que são alvos, adicione-as aqui. Exemplo: */
+.contact[id] {
+    scroll-margin-top: 100px;
+}
+
+@media (min-width: 901px) {
+    .about {
+        max-width: 800px; /* Limita o texto para melhor legibilidade no desktop */
+        margin: 0 auto; /* Centraliza esse bloco limitado */
+    }
+}
+
+/* ======================================= */
+/* EFEITO SCROLL REVEAL (REVELAÇÃO AO ROLAR) */
+/* ======================================= */
+
+/* 1. CLASSE BASE: Define o estado inicial do elemento (invisível e ligeiramente para baixo) */
+.reveal-item {
+    /* 1.1 Estado Inicial */
+    opacity: 0; /* Totalmente invisível */
+    transform: translateY(20px); /* Move 20px para baixo da posição final */
+
+    /* 1.2 Transição Suave */
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), /* Curva de animação suave */
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.reveal-item.visible {
+    opacity: 1; /* Totalmente visível */
+    transform: translateY(0); /* Volta para a posição original */
+}
+
